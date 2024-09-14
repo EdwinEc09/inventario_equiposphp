@@ -211,7 +211,7 @@
                         <a class="side-nav-menu-link" href="login">Login</a>
                     </li>
                     <li class="side-nav-menu-item">
-                        <a class="side-nav-menu-link" href="register">Register</a>
+                        <a class="side-nav-menu-link" href="registro">Register</a>
                     </li>
                     <li class="side-nav-menu-item">
                         <a class="side-nav-menu-link" href="password-reset">Forgot Password</a>

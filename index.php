@@ -46,7 +46,7 @@ if (in_array($page, $noLayoutPages)) {
         //     require 'layout.php';
         //     break;
         case 'home':
-            require 'home.php';
+            require 'inicio/home.php';
             break;
 // -------------------------------------
     // inicio usuario
@@ -62,12 +62,12 @@ if (in_array($page, $noLayoutPages)) {
             break;
 // -------------------------------------
         default:
-            require 'no-found.php'; // Página no encontrada
+            require 'inicio/no-found.php'; // Página no encontrada
             break;
     }
     $content = ob_get_clean();
 
     // Incluir el archivo de layout si no está en las páginas excluidas
-    require 'layout.php';
+    require 'inicio/layout.php';
 }
 ?>
