@@ -158,6 +158,27 @@ class OutSourcing
             return [];
         }
     }
+
+
+    // asignaciones------------
+       // OBTENER EQUIPOS
+       public function obtenerasignacionesjson()
+       {
+           $conn = $this->dbConnect();
+           // $id_prueba = 1;
+           if ($conn) {
+               // $sql = "SELECT * FROM empleados WHERE ID = ? ";
+               $sql = "SELECT e.ID,  ee.nombre,te.tipo,te.marca,e.fecha_asignacion, e.fecha_registro, e.estado_asignacion  FROM asignaciones e JOIN empleados ee ON e.id_empleado = ee.ID JOIN equipos te ON e.id_equipos = te.ID;";
+               $stmt = $conn->prepare($sql);
+               // $stmt->execute([$id_prueba]);
+               $stmt->execute(); // Sin parámetros porque queremos obtener todos los registros
+   
+               // Devolver los resultados en un array asociativo
+               return $stmt->fetchAll(PDO::FETCH_ASSOC);
+           } else {
+               return ['error' => 'Error al conectar con la base de datos.'];
+           }
+       }
     
 }
 ?>

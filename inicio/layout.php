@@ -384,6 +384,7 @@
     <!-- mios  -->
     <script src="backend/js/empleados.js"></script>
     <script src="backend/js/equipos.js"></script>
+    <script src="backend/js/asignaciones.js"></script>
     <script src="backend/js/onload_todos.js"></script>
     <script>
     $.GDCore.components.GDChartistArea.init('.js-area-chart');

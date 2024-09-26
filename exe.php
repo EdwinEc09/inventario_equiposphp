@@ -73,6 +73,21 @@ if (isset($_POST['run']) && isset($_POST['action'])) {
                     break;
             }
             break;
+        case 'asignaciones':
+            switch ($_POST['action']) {
+                case 'obtenerasignaciones':
+                    // Obtener los datos de la base de datos
+                    $asignacionesver = $OS->obtenerasignacionesjson();
+
+                    // Asegúrate de devolver los datos como JSON
+                    echo json_encode($asignacionesver);
+                    break;
+                // default
+                default:
+                    echo json_encode(['error' => 'Acción no válida en el case asignaciones']);
+                    break;
+            }
+            break;
 
         default:
             echo json_encode(['error' => 'Acción no válida en el exe']);
