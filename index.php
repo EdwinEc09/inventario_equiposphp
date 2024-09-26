@@ -1,4 +1,8 @@
 <?php
+// require 'backend/conexion/conexion.php';
+include 'backend/conexion/conexion.php';
+$OS = new OutSourcing();
+
 // Incluir configuración global
 // require 'settings.php';
 
@@ -53,12 +57,28 @@ if (in_array($page, $noLayoutPages)) {
         case 'settings':
             require 'usuario/settings.php';
             break;
+     
    
-        case 'user-edit':
-            require 'usuario/user-edit.php';
+        case 'agregar_empleados':
+            require 'usuario/agregarempleados.php';
             break;
-        case 'users':
-            require 'usuario/users.php';
+        case 'empleados':
+            require 'usuario/empleados.php';
+            break;
+// -------------------------------------
+
+    //equipos
+   case 'ver_equipos':
+            require 'equipos/verequipos.php';
+            break;
+   case 'agregar_equipos':
+            require 'equipos/agregarequipos.php';
+            break;
+   case 'ver_asignacion':
+            require 'equipos/verasignacion.php';
+            break;
+   case 'agregarasignacion':
+            require 'equipos/agregarasignacion.php';
             break;
 // -------------------------------------
         default:

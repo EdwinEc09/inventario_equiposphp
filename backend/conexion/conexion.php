@@ -1,0 +1,163 @@
+<?php
+class OutSourcing
+{
+    // Datos de la conexión
+    private $database = 'Inventario_equipos';
+    private $host = 'TI-EDWIN\SQLEXPRESS';
+    private $user = 'sa';
+    private $pass = '32215';
+    private $conexion;
+
+    // Conectar a la base de datos
+    public function dbConnect()
+    {
+        try {
+            if (!isset($this->conexion)) {
+                $this->conexion = new PDO("sqlsrv:server=$this->host;database=$this->database", $this->user, $this->pass);
+                $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            }
+            return $this->conexion;
+        } catch (PDOException $e) {
+            echo 'Error de conexión: ' . $e->getMessage();
+            return null;
+        }
+    }
+
+// este es obtener los datos por medio de un parametro, en este casi el Id
+    public function obtenerempleadosjson()
+    {
+        $conn = $this->dbConnect();
+        // $id_prueba = 1;
+        if ($conn) {
+            // $sql = "SELECT * FROM empleados WHERE ID = ? ";
+            $sql = "SELECT * FROM empleados  ";
+            $stmt = $conn->prepare($sql);
+            // $stmt->execute([$id_prueba]);
+            $stmt->execute(); // Sin parámetros porque queremos obtener todos los registros
+
+            // Devolver los resultados en un array asociativo
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return ['error' => 'Error al conectar con la base de datos.'];
+        }
+    }
+
+// este es para que me devuelva todos los datos de una tabla
+    public function agregar_empleados_json($nombre_empleado_json, $correo_empleado_json, $cede_empleado_json, $Fecha_ingreso_empleado_json, $cargo_empleado_json, $area_empleado_json)
+    {
+        $conn = $this->dbConnect();
+
+        if ($conn) {
+            // Obtener la fecha y hora actual
+            // $fecha_creacion_json = date("Y-m-d H:i:s");
+            $fecha_creacion_json = date("Y-m-d h:i:s A");
+
+            // Consulta para insertar un nuevo empleado
+            $sql = "INSERT INTO empleados (nombre, correo, cede, fecha_creacion,Fecha_ingreso,cargo,area, estado) VALUES (?, ?, ?, ?,?,?,?, 1)";
+            $stmt = $conn->prepare($sql);
+
+            // Ejecutar la consulta con los valores proporcionados
+            $stmt->execute([$nombre_empleado_json, $correo_empleado_json, $cede_empleado_json, $fecha_creacion_json, $Fecha_ingreso_empleado_json, $cargo_empleado_json, $area_empleado_json]);
+
+            // Si la inserción fue exitosa, devolver true o algún mensaje
+            if ($stmt->rowCount() > 0) {
+                return ['success' => 'Empleado agregado exitosamente.'];
+            } else {
+                return ['error' => 'Error al insertar el empleado.'];
+            }
+        } else {
+            return ['error' => 'Error al conectar con la base de datos.'];
+        }
+    }
+
+    // OBTENER EQUIPOS
+    public function obtenerequiposjson()
+    {
+        $conn = $this->dbConnect();
+        // $id_prueba = 1;
+        if ($conn) {
+            // $sql = "SELECT * FROM empleados WHERE ID = ? ";
+            $sql = "SELECT * FROM equipos ";
+            $stmt = $conn->prepare($sql);
+            // $stmt->execute([$id_prueba]);
+            $stmt->execute(); // Sin parámetros porque queremos obtener todos los registros
+
+            // Devolver los resultados en un array asociativo
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return ['error' => 'Error al conectar con la base de datos.'];
+        }
+    }
+
+    // este es para que me devuelva todos los datos de una tabla
+    public function agregar_equipos_json($tipo_equipo_json, $marca_equipo_json, $serial_equipo_json, $dire_mac_wifi_equipo_json, $dire_mac_ethernet_equipo_json, $imei1_equipo_json, $imei2_equipo_json, $estado_equipo_json, $observacion_equipo_json)
+    {
+        $conn = $this->dbConnect();
+
+        if ($conn) {
+            // Obtener la fecha y hora actual
+            // $fecha_creacion_json = date("Y-m-d H:i:s");
+            $fecha_creacion_json = date("Y-m-d h:i:s A");
+
+            // Consulta para insertar un nuevo empleado
+            $sql = "INSERT INTO equipos (tipo, marca, serial, direccion_mac_wifi, direccion_mac_ethenet, imei1, imei2,fecha_creacion,estado,observacion) VALUES (?, ?, ?, ?,?,?,?,?,?,?)";
+            $stmt = $conn->prepare($sql);
+
+            // Ejecutar la consulta con los valores proporcionados
+            $stmt->execute([$tipo_equipo_json, $marca_equipo_json, $serial_equipo_json, $dire_mac_wifi_equipo_json, $dire_mac_ethernet_equipo_json, $imei1_equipo_json, $imei2_equipo_json, $fecha_creacion_json, $estado_equipo_json, $observacion_equipo_json]);
+            // Si la inserción fue exitosa, devolver true o algún mensaje
+            if ($stmt->rowCount() > 0) {
+                return ['success' => 'equipo agregado exitosamente.'];
+            } else {
+                return ['error' => 'Error al insertar el equipos.'];
+            }
+        } else {
+            return ['error' => 'Error al conectar con la base de datos.'];
+        }
+    }
+
+    // este es estado de equipos listar combo
+    function estados_equipos_listar_combo() {
+        $conn = $this->dbConnect(); // Asegúrate de que dbConnect devuelve la conexión
+        if ($conn) {
+            $sql = "SELECT DISTINCT ID , estado FROM estado_equipos WHERE estado NOT IN ('')";
+    
+            $query = $conn->prepare($sql); 
+            $query->execute(); 
+            $result = $query->fetchAll(PDO::FETCH_OBJ); 
+            
+            // Verifica si la consulta devolvió algún resultado
+            if (!$result) {
+                return [];
+            } else {
+                return $result;
+            }
+        } else {
+            // Si no hay conexión, retorna un error o una lista vacía
+            return [];
+        }
+    }
+     // este es tipo de equipos listar combo
+    function tipos_equipos_listar_combo() {
+        $conn = $this->dbConnect(); // Asegúrate de que dbConnect devuelve la conexión
+        if ($conn) {
+            $sql = "SELECT DISTINCT tipo FROM tipos_equipos WHERE tipo NOT IN ('')";
+    
+            $query = $conn->prepare($sql); 
+            $query->execute(); 
+            $result = $query->fetchAll(PDO::FETCH_OBJ); 
+            
+            // Verifica si la consulta devolvió algún resultado
+            if (!$result) {
+                return [];
+            } else {
+                return $result;
+            }
+        } else {
+            // Si no hay conexión, retorna un error o una lista vacía
+            return [];
+        }
+    }
+    
+}
+?>

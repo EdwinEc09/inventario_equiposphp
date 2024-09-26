@@ -5,15 +5,15 @@
         <nav class="d-none d-md-block" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#">Users</a>
+                    <a href="#">Asignaciones</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">All Users</li>
+                <li class="breadcrumb-item active" aria-current="page">Todas las Asignaciones</li>
             </ol>
         </nav>
         <!-- End Breadcrumb -->
 
         <div class="mb-3 mb-md-4 d-flex justify-content-between">
-            <div class="h3 mb-0">Users</div>
+            <div class="h3 mb-0">Asignaciones</div>
         </div>
 
 
@@ -25,7 +25,7 @@
                         <th class="font-weight-semi-bold border-top-0 py-2">#</th>
                         <th class="font-weight-semi-bold border-top-0 py-2">Name</th>
                         <th class="font-weight-semi-bold border-top-0 py-2">Email</th>
-                        <th class="font-weight-semi-bold border-top-0 py-2">Registration Date</th>
+                        <th class="font-weight-semi-bold border-top-0 py-2">Seriañ</th>
                         <th class="font-weight-semi-bold border-top-0 py-2">Status</th>
                         <th class="font-weight-semi-bold border-top-0 py-2">Actions</th>
                     </tr>
@@ -125,8 +125,7 @@
                     <ul class="pagination justify-content-end font-weight-semi-bold mb-0">
                         <li class="page-item"> <a id="datatablePaginationPrev" class="page-link" href="#!"
                                 aria-label="Previous"><i
-                                    class="gd-angle-left icon-text icon-text-xs d-inline-block"></i></a>
-                        </li>
+                                    class="gd-angle-left icon-text icon-text-xs d-inline-block"></i></a> </li>
                         <li class="page-item d-none d-md-block"><a id="datatablePaginationPage0"
                                 class="page-link active" href="#!" data-dt-page-to="0">1</a></li>
                         <li class="page-item d-none d-md-block"><a id="datatablePagination1" class="page-link" href="#!"
@@ -135,8 +134,7 @@
                                 data-dt-page-to="2">3</a></li>
                         <li class="page-item"> <a id="datatablePaginationNext" class="page-link" href="#!"
                                 aria-label="Next"><i
-                                    class="gd-angle-right icon-text icon-text-xs d-inline-block"></i></a>
-                        </li>
+                                    class="gd-angle-right icon-text icon-text-xs d-inline-block"></i></a> </li>
                     </ul>
                 </nav>
             </div>
