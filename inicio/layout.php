@@ -160,7 +160,7 @@
                     </a>
                 </li>
                 <!-- End Dashboard -->
-                <!-- Documentation -->
+                <!-- Documentation  INICIO-->
                 <li class="side-nav-menu-item">
                     <a class="side-nav-menu-link media align-items-center" href="home">
                         <span class="side-nav-menu-icon d-flex mr-3">
@@ -168,12 +168,11 @@
                         </span>
                         <span class="side-nav-fadeout-on-closed media-body">Historial de Asignaciones</span>
                     </a>
-                </li>
-                <!-- End Documentation -->
-                <!-- Title -->
-                <li class="sidebar-heading h6">Modulos</li>
+
+                    <!-- Title -->
+                <li class="sidebar-heading h6">Modulos de de Usuarios</li>
                 <!-- End Title -->
-                <!-- Users -->
+                <!-- EMPLEADOS -->
                 <li class="side-nav-menu-item side-nav-has-menu">
                     <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subUsers">
                         <span class="side-nav-menu-icon d-flex mr-3">
@@ -197,7 +196,7 @@
                     </ul>
                     <!-- End Users: subUsers -->
                 </li>
-                <!-- End Users -->
+
                 <!-- Equipos -->
                 <li class="side-nav-menu-item side-nav-has-menu">
                     <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subEquipos">
@@ -223,6 +222,8 @@
                     <!-- End Users: subEquipos -->
                 </li>
                 <!-- End Asignacion -->
+
+
                 <!-- Asignacion -->
                 <li class="side-nav-menu-item side-nav-has-menu">
                     <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subAsignacion">
@@ -248,6 +249,40 @@
                     <!-- End Asignacion: Asignacion -->
                 </li>
                 <!-- End Asignacion -->
+
+                </li>
+                <!-- End Documentation -->
+                <!-- Title -->
+                <li class="sidebar-heading h6">Modulos de Administradores</li>
+                <!-- End Title -->
+
+                <!-- ESTADOS EQUIPOS -->
+                <!-- Asignacion -->
+                <li class="side-nav-menu-item side-nav-has-menu">
+                    <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subTiposequipos">
+                        <span class="side-nav-menu-icon d-flex mr-3">
+                            <i class="gd-agenda"></i>
+                        </span>
+                        <span class="side-nav-fadeout-on-closed media-body">Ajustes de Equipos</span>
+                        <span class="side-nav-control-icon d-flex">
+                            <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
+                        </span>
+                        <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
+                    </a>
+
+                    <!-- Asignacion: subEquipos -->
+                    <ul id="subTiposequipos" class="side-nav-menu side-nav-menu-second-level mb-0">
+                        <li class="side-nav-menu-item">
+                            <a class="side-nav-menu-link" href="tipos-de-equipos">tipos de equipos</a>
+                        </li>
+                        <li class="side-nav-menu-item">
+                            <a class="side-nav-menu-link" href="estado-de-equipos">Estados de equipo</a>
+                        </li>
+                    </ul>
+                    <!-- End Asignacion: Asignacion -->
+                </li>
+
+
 
                 <!-- Authentication -->
                 <!-- <li class="side-nav-menu-item side-nav-has-menu">
@@ -367,6 +402,10 @@
         </div>
     </main>
 
+<!-- incluir el modal para agregar tipos de equipos -->
+<?php
+ include 'equipos/ajustesequipos/modaltipos.html';
+ ?>
 
 
     <script src="public/graindashboard/js/graindashboard.js"></script>
@@ -381,6 +420,7 @@
     <script src="public/demo/gd.chartist-donut.js"></script>
 
 
+
     <!-- mios  -->
     <script src="backend/js/empleados.js"></script>
     <script src="backend/js/equipos.js"></script>
@@ -391,7 +431,7 @@
     $.GDCore.components.GDChartistBar.init('.js-bar-chart');
     $.GDCore.components.GDChartistDonut.init('.js-donut-chart');
     </script>
-
+  
 </body>
 <style>
 /* margen a la tabla  */

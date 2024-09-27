@@ -81,6 +81,14 @@ if (in_array($page, $noLayoutPages)) {
             require 'equipos/agregarasignacion.php';
             break;
 // -------------------------------------
+    // tipos de equipos
+    case 'tipos-de-equipos':
+        require 'equipos/ajustesequipos/tiposequipos.php';
+        break;
+    case 'estado-de-equipos':
+        require 'equipos/ajustesequipos/estadoequipo.php';
+        break;
+// -------------------------------------
         default:
             require 'inicio/no-found.php'; // Página no encontrada
             break;
