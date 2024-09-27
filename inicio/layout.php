@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -176,7 +175,7 @@
                 <!-- End Title -->
                 <!-- Users -->
                 <li class="side-nav-menu-item side-nav-has-menu">
-                    <a class="side-nav-menu-link media align-items-center"  href="#" data-target="#subUsers">
+                    <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subUsers">
                         <span class="side-nav-menu-icon d-flex mr-3">
                             <i class="gd-user"></i>
                         </span>
@@ -190,7 +189,7 @@
                     <!-- Users: subUsers -->
                     <ul id="subUsers" class="side-nav-menu side-nav-menu-second-level mb-0">
                         <li class="side-nav-menu-item">
-                            <a class="side-nav-menu-link"  href="empleados">Ver Empleados</a>
+                            <a class="side-nav-menu-link" href="empleados">Ver Empleados</a>
                         </li>
                         <li class="side-nav-menu-item">
                             <a class="side-nav-menu-link" href="agregar_empleados">Agregar Empleados</a>
@@ -218,7 +217,7 @@
                             <a class="side-nav-menu-link" href="ver_equipos">Ver equipos</a>
                         </li>
                         <li class=" side-nav-menu-item">
-                                <a class="side-nav-menu-link" href="agregar_equipos">Agregar Equipo</a>
+                            <a class="side-nav-menu-link" href="agregar_equipos">Agregar Equipo</a>
                         </li>
                     </ul>
                     <!-- End Users: subEquipos -->
@@ -343,7 +342,8 @@
                                     href="#">FAQ</a></li>
                             <li class="list-dot-item list-inline-item mr-lg-2"><a class="link-dark" href="#">Soporte</a>
                             </li>
-                            <li class="list-dot-item list-inline-item mr-lg-2"><a class="link-dark" href="#">Contactanos</a></li>
+                            <li class="list-dot-item list-inline-item mr-lg-2"><a class="link-dark"
+                                    href="#">Contactanos</a></li>
                         </ul>
                     </div>
 
@@ -394,30 +394,32 @@
 
 </body>
 <style>
-    /* margen a la tabla  */
-    .table{
-        border:1px solid black;     
-    }
-    /* color al encabezado de la tabla  */
-    .table thead{
-        background: #ddd;
-      
-    }
-    /* borde de abajo del encabezado */
-    .table thead th{
-        border-bottom:1px solid black;   
-    }
+/* margen a la tabla  */
+.table {
+    border: 1px solid black;
+}
 
-    /* cuando pase el cursor por los datos que muestra hace un background */
-    .table tbody tr:hover{
-        background: #ddd;
-        cursor: pointer;
-    }
-    
-    /* hace  */
-    /* .table td:hover{
+/* color al encabezado de la tabla  */
+.table thead {
+    background: #ddd;
+
+}
+
+/* borde de abajo del encabezado */
+.table thead th {
+    border-bottom: 1px solid black;
+}
+
+/* cuando pase el cursor por los datos que muestra hace un background */
+.table tbody tr:hover {
+    background: #ddd;
+    cursor: pointer;
+}
+
+/* hace  */
+/* .table td:hover{
         background: #ddd;
     } */
-
 </style>
+
 </html>

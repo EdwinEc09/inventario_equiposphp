@@ -31,7 +31,7 @@ function obtener_datos_empleadosver() {
                     var fila = `
                         <tr>
                             <td class="py-3">${index + 1}</td>
-                            <td class="align-middle py-3">${usuario.nombre}</td>
+                            <td class="align-middle py-3">${usuario.nombres}</td>
                             <td class="py-3">${usuario.correo}</td>
                             <td class="py-3">${usuario.cede}</td>
                             <td class="py-3">${usuario.fecha_creacion}</td>

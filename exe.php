@@ -82,6 +82,18 @@ if (isset($_POST['run']) && isset($_POST['action'])) {
                     // Asegúrate de devolver los datos como JSON
                     echo json_encode($asignacionesver);
                     break;
+
+                case 'agregar_asignacion_js':
+                    $pasar_asignaciones_a_json = $OS->agregar_asignacion_json(
+                            $_POST['empleado_asignacion_json'],
+                            $_POST['equipo_asignacion_json'],
+                            $_POST['fecha_asignacion_asignaciones_json'],
+                            $_POST['acta_firmada_asignacion_json']
+                    
+                            );
+                        echo json_encode($pasar_asignaciones_a_json);
+                    break;
+    
                 // default
                 default:
                     echo json_encode(['error' => 'Acción no válida en el case asignaciones']);
