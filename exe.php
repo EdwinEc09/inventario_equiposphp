@@ -52,6 +52,15 @@ if (isset($_POST['run']) && isset($_POST['action'])) {
                     echo json_encode($equiposver);
                     break;
 
+                    // ver tipos de equipo
+                case 'obtenertipoequipos':
+                    // Obtener los datos de la base de datos
+                    $tipoequiposver = $OS->obtenertipoequiposjson();
+
+                    // Asegúrate de devolver los datos como JSON
+                    echo json_encode($tipoequiposver);
+                    break;
+
                 case 'agregar_equipos_js':
                     $pasar_equipos_a_json = $OS->agregar_equipos_json(
                             $_POST['tipo_equipo_json'],
@@ -65,6 +74,15 @@ if (isset($_POST['run']) && isset($_POST['action'])) {
                             $_POST['observacion_equipo_json']
                         );
                         echo json_encode($pasar_equipos_a_json);
+                        break;
+
+                        // agregar tipos de equipos
+                case 'agregar_tiposequipos_json':
+                    $pasar_tiposequipos_a_json = $OS->agregar_tiposequipos_json(
+                            $_POST['tipos_equipos_tiposequipos_json']
+              
+                        );
+                        echo json_encode($pasar_tiposequipos_a_json);
                         break;
 
                 // default

@@ -38,8 +38,8 @@
                 </thead>
                 <tbody id="tabla_vertiposequipos">
 
-
-                    <td class="text-center"> NO HAY DATOS </td>
+<!-- 
+                    <td class="text-center"> NO HAY DATOS </td> -->
 
 
                 </tbody>

@@ -88,6 +88,24 @@ class OutSourcing
             return ['error' => 'Error al conectar con la base de datos.'];
         }
     }
+    // OBTENER EQUIPOS
+    public function obtenertipoequiposjson()
+    {
+        $conn = $this->dbConnect();
+        // $id_prueba = 1;
+        if ($conn) {
+            // $sql = "SELECT * FROM empleados WHERE ID = ? ";
+            $sql = "SELECT * FROM tipos_equipos ";
+            $stmt = $conn->prepare($sql);
+            // $stmt->execute([$id_prueba]);
+            $stmt->execute(); // Sin parámetros porque queremos obtener todos los registros
+
+            // Devolver los resultados en un array asociativo
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return ['error' => 'Error al conectar con la base de datos.'];
+        }
+    }
 
     // este es para que me devuelva todos los datos de una tabla
     public function agregar_equipos_json($tipo_equipo_json, $marca_equipo_json, $serial_equipo_json, $dire_mac_wifi_equipo_json, $dire_mac_ethernet_equipo_json, $imei1_equipo_json, $imei2_equipo_json, $estado_equipo_json, $observacion_equipo_json)
@@ -105,6 +123,32 @@ class OutSourcing
 
             // Ejecutar la consulta con los valores proporcionados
             $stmt->execute([$tipo_equipo_json, $marca_equipo_json, $serial_equipo_json, $dire_mac_wifi_equipo_json, $dire_mac_ethernet_equipo_json, $imei1_equipo_json, $imei2_equipo_json, $fecha_creacion_json, $estado_equipo_json, $observacion_equipo_json]);
+            // Si la inserción fue exitosa, devolver true o algún mensaje
+            if ($stmt->rowCount() > 0) {
+                return ['success' => 'equipo agregado exitosamente.'];
+            } else {
+                return ['error' => 'Error al insertar el equipos.'];
+            }
+        } else {
+            return ['error' => 'Error al conectar con la base de datos.'];
+        }
+    }
+    // este es para que me devuelva todos los datos de una tabla
+    public function agregar_tiposequipos_json($tipos_equipos_tiposequipos_json)
+    {
+        $conn = $this->dbConnect();
+
+        if ($conn) {
+            // Obtener la fecha y hora actual
+            // $fecha_creacion_json = date("Y-m-d H:i:s");
+            $fecha_creacion_json = date("Y-m-d h:i:s A");
+
+            // Consulta para insertar un nuevo empleado
+            $sql = "INSERT INTO tipos_equipos (tipo) VALUES (?)";
+            $stmt = $conn->prepare($sql);
+
+            // Ejecutar la consulta con los valores proporcionados
+            $stmt->execute([$tipos_equipos_tiposequipos_json]);
             // Si la inserción fue exitosa, devolver true o algún mensaje
             if ($stmt->rowCount() > 0) {
                 return ['success' => 'equipo agregado exitosamente.'];
