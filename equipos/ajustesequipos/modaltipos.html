@@ -1,11 +1,10 @@
-<!-- Modal -->
+<!-- Modal agregar tipo de equipos  -->
 <div id="modaltiposequipos" class="modal fade" role="dialog"
     aria-labelledby="modaltiposequipos" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Fecha de
-                    asignacion</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Agrega Tipos de equipos </h5>
                 <button type="button" class="close" data-dismiss="modal"
                     aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -41,6 +40,55 @@
                 <button type="button" class="btn btn-secondary"
                     data-dismiss="modal">Cerrar</button>
                 <button type="button" id="btn_agregar_tiposequipos" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
+
+
+<!-- Modal agregar  estado de equipos -->
+<div id="modalestadosequipos" class="modal fade" role="dialog"
+    aria-labelledby="modalestadosequipos" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">estados de equipos </h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <!-- Form -->
+                <div>
+                    <div class="form-row">
+
+
+                        <div class="form-group col-12 col-md-12">
+                            <label for="estados_equipos_tiposequipos">Estados</label>
+                            <input type="text" class="form-control" value
+                                id="estados_equipos_tiposequipos"
+                                name="estados_equipos_tiposequipos"
+                                placeholder="Estados de equipo">
+                        </div>
+                        <!-- 
+                        <div class="form-group col-12 col-md-6">
+                            <label for="email">Serial</label>
+                            <input type="Text" class="form-control" value="" id="email" name="email" placeholder="Serial">
+                        </div> -->
+                    </div>
+
+             
+                </div>
+                <!-- End Form -->
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                    data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btn_agregar_estadosequipos" class="btn btn-primary">Guardar Cambios</button>
             </div>
         </div>
     </div>

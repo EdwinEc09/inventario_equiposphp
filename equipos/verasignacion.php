@@ -29,6 +29,7 @@
                         <th class="font-weight-semi-bold border-top-0 py-2">fecha de Asignacion</th>
                         <th class="font-weight-semi-bold border-top-0 py-2">Fecha de registro</th>
                         <th class="font-weight-semi-bold border-top-0 py-2">Estado</th>
+                        <th class="font-weight-semi-bold border-top-0 py-2">Firma acta</th>
                         <th class="font-weight-semi-bold border-top-0 py-2">Actions</th>
                     </tr>
                 </thead>

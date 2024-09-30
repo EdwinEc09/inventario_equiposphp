@@ -23,10 +23,19 @@ function obtener_datos_asignacion() {
 
                 // Itera sobre los datos recibidos y genera las filas de la tabla
                 $.each(data, function (index, asignacionesver) {
+                    
                     // esto es por si el esta activo o inactivo , 1 es activo y 0 es inactivo
                     var estadoBadgeasignacion = asignacionesver.estado_asignacion == '1'
                         ? '<span class="badge badge-pill badge-success">Activo</span>'
                         : '<span class="badge badge-pill badge-danger">Inactivo</span>';
+                    var firmaactaBadgeasignacion = asignacionesver.acta_firmada == '1'
+                        ? '<span class="badge badge-pill badge-success">✔️</span>'
+                        : '<span class="badge badge-pill badge-danger">No</span>';
+
+                        // esta es para ver si tiene el acta firmada 
+                    // var firmaactaBadgeasignacion = asignacionesver.acta_firmada == '0'
+                    //     ? '<span class="badge badge-pill badge-success">Si</span>'
+                    //     : '<span class="badge badge-pill badge-danger">No</span>';
 
                     var fila = `
                         <tr>
@@ -37,10 +46,17 @@ function obtener_datos_asignacion() {
                             <td class="py-3">${asignacionesver.fecha_asignacion}</td>
                             <td class="py-3">${asignacionesver.fecha_registro}</td>
                             <td class="py-3">${estadoBadgeasignacion}</td>
+                            <td class="py-3">${firmaactaBadgeasignacion}</td>
                             <td class="py-3">
                                 <div class="position-relative">
-                                    <a class="link-dark d-inline-block" href="#">
+                                    <a class="link-dark d-inline-block" href="#editar-asignacion">
                                         <i class="gd-pencil icon-text"></i>
+                                    </a>
+                                    <a class="link-dark d-inline-block" href="#ver-detalles">
+                                        <i class="gd-eye icon-text"></i>
+                                    </a>
+                                    <a class="link-dark d-inline-block" href="#ver-detalles">
+                                        <i class="gd- icon-text"></i>
                                     </a>
                               
                                 </div>

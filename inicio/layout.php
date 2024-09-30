@@ -448,7 +448,7 @@
 
 /* borde de abajo del encabezado */
 .table thead th {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid  ;
 }
 
 /* cuando pase el cursor por los datos que muestra hace un background */

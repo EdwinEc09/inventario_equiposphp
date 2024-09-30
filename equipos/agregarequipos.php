@@ -37,7 +37,7 @@
                                 echo '<option value="">Seleccionar</option>';
                                 // Itera sobre los resultados y genera las opciones
                                 foreach ($tipos_equipos as $row) {
-                                    echo '<option value="' . $row->tipo . '">' . $row->tipo . '</option>';
+                                    echo '<option value="'.$row->tipo.'"> '.$row->tipo.' </option>';
                                 }
                             } else {
                                 echo '<option value="">No hay Tipos disponibles</option>';

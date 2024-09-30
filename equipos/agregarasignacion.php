@@ -54,7 +54,7 @@
                                 echo '<option value="">Seleccionar</option>';
                                 // Itera sobre los resultados y genera las opciones
                                 foreach ($equipos_asignar as $row) {
-                                    echo '<option value="' . $row->ID . '">T:  ' . $row->tipo . '  - M:  '. $row->marca .'  - SN:  ' . $row->serial . '</option>';
+                                    echo '<option value="'.$row->ID.'">T:  ' . $row->tipo . '  - M:  '. $row->marca .'  - SN:  ' . $row->serial . '</option>';
                                 }
                             } else {
                                 echo '<option value="">No Hay equipos</option>';

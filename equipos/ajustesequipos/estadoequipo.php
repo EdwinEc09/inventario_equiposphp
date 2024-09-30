@@ -15,7 +15,8 @@
     </nav>
     <!-- End Breadcrumb -->
 
-    <button id="" type="submit" class="btn btn-primary float-right">Buscar</button>
+    <button id="" type="submit" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalestadosequipos">Crear estados de equipos</button>
+
     <!--  -->
     <div class="mb-3 mb-md-4 d-flex justify-content-between">
         <div class="h3 mb-0">Estados de equipos</div>
@@ -32,7 +33,7 @@
                     <th class="font-weight-semi-bold border-top-0 py-3">acciones</th>
                 </tr>
             </thead>
-            <tbody id="tabla_vertiposequipos">
+            <tbody id="tabla_verestadosequipos">
             
 
                     <td class="text-center"> NO HAY DATOS </td>

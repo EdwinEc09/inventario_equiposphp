@@ -63,7 +63,8 @@ SELECT e.ID, te.tipo AS tipo_equipo, e.marca, e.serial, e.direccion_mac_wifi, e.
 insert into equipos (tipo, marca, serial, direccion_mac_wifi, direccion_mac_ethenet, imei1, imei2,fecha_creacion,estado,observacion) values ('PC','Lenovo','1128YUA8','direccion1234wifi','direccion12345ethenet','imei1222','imei2333','2024-05-01','Disponible','esta es una observacion de prueba');
 insert into equipos (tipo, marca, serial, direccion_mac_wifi, direccion_mac_ethenet, imei1, imei2,fecha_creacion,estado,observacion) values ('celular','sansung A20','123456789','direccion1234wifi','direccion12345ethenet','imei1222','imei2333','2024-05-01','Averiado', 'esta es una pruena de la descripcion de prueba 2');
 
-
+UPDATE equipos SET estado = 'Disponible' WHERE estado  = 'Asignado';
+UPDATE equipos SET estado = 'Asignado' WHERE ID = 2;
 /*este es para el estado de equipos*/
 DROP TABLE estado_equipos;
 
@@ -76,8 +77,10 @@ select * from estado_equipos;
 
 select distinct estado from estado_equipos where  estado not in ('');
 
+
+
+insert into estado_equipos (estado) values ('Asignado');
 insert into estado_equipos (estado) values ('Disponible');
---insert into estado_equipos (estado) values ('Asignado');
 insert into estado_equipos (estado) values ('Averiado');
 insert into estado_equipos (estado) values ('Robado');
 insert into estado_equipos (estado) values ('Otrosss');
@@ -115,6 +118,9 @@ create table asignaciones(
 	fecha_registro datetime not null,
 	estado_asignacion bit not null,
 	acta_firmada bit not null
+
+	FOREIGN KEY (id_empleado) REFERENCES empleados(ID),
+    FOREIGN KEY (id_equipos) REFERENCES equipos(ID)
 );
 
 select * from asignaciones;
@@ -123,4 +129,4 @@ insert into asignaciones (id_empleado,id_equipos,fecha_asignacion,fecha_registro
 insert into asignaciones (id_empleado,id_equipos,fecha_asignacion,fecha_registro,estado_asignacion,acta_firmada) values (2,2,'2024-05-04','2024-09-26',1,1);
 
 
-SELECT e.ID,  ee.nombres,te.tipo,te.marca,e.fecha_asignacion, e.fecha_registro, e.estado_asignacion  FROM asignaciones e JOIN empleados ee ON e.id_empleado = ee.ID JOIN equipos te ON e.id_equipos = te.ID;
+SELECT e.ID,  ee.nombres,te.tipo,te.marca,e.fecha_asignacion, e.fecha_registro, eq.estado FROM asignaciones e JOIN empleados ee ON e.id_empleado = ee.ID JOIN equipos te ON e.id_equipos = te.ID join estado_equipos eq on e.estado_asignacion = eq.ID;
