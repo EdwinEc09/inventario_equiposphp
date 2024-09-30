@@ -55,10 +55,6 @@ function obtener_datos_asignacion() {
                                     <a class="link-dark d-inline-block" href="#ver-detalles">
                                         <i class="gd-eye icon-text"></i>
                                     </a>
-                                    <a class="link-dark d-inline-block" href="#ver-detalles">
-                                        <i class="gd- icon-text"></i>
-                                    </a>
-                              
                                 </div>
                             </td>
                         </tr>
