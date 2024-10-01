@@ -23,6 +23,7 @@ function obtener_datos_empleadosver() {
 
                 // Itera sobre los datos recibidos y genera las filas de la tabla
                 $.each(data, function (index, usuario) {
+                    console
                     // esto es por si el esta activo o inactivo , 1 es activo y 0 es inactivo
                     var estadoBadge = usuario.estado == '1'
                         ? '<span class="badge badge-pill badge-success">Activo</span>'
@@ -41,8 +42,11 @@ function obtener_datos_empleadosver() {
                             <td class="py-3">${estadoBadge}</td>
                             <td class="py-3">
                                 <div class="position-relative">
-                                    <a class="link-dark d-inline-block" href="#">
+                                    <a class="link-dark d-inline-block" title="Editar empleados" href="#editar-empleados" data-toggle="modal" data-target="#modalactualizarempleados">
                                         <i class="gd-pencil icon-text"></i>
+                                    </a>
+                                    <a class="link-dark d-inline-block" title="Ver mas informacion" href="#mas-info-empleados">
+                                        <i class="gd-eye icon-text"></i>
                                     </a>
                               
                                 </div>
