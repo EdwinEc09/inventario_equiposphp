@@ -42,8 +42,8 @@ function obtener_datos_empleadosver() {
                             <td class="py-3">${estadoBadge}</td>
                             <td class="py-3">
                                 <div class="position-relative">
-                                    <a class="link-dark d-inline-block" title="Editar empleados" href="#editar-empleados" data-toggle="modal" data-target="#modalactualizarempleados">
-                                        <i class="gd-pencil icon-text"></i>
+                                    <a style="margin-right: 7px;" class="link-dark d-inline-block" title="Editar empleados" href="#editar-empleados" value="${usuario.ID}" onclick="mostrar_datos_modalEmpleado(${usuario.ID})" data-toggle="modal" data-target="#modalactualizarempleados">
+                                        <i class="gd-reload icon-text"></i>
                                     </a>
                                     <a class="link-dark d-inline-block" title="Ver mas informacion" href="#mas-info-empleados">
                                         <i class="gd-eye icon-text"></i>
@@ -176,6 +176,113 @@ function agregar_empleados() {
             } else {
                 console.log('Error no capturado: ' + jqXHR.responseText);
             }
+        }
+    });
+}
+
+
+
+
+// ------------------------------------------------------------------
+// actualizar un empleado
+$('#btn_actualizar_empleados').on('click', function () {
+    actualizar_empleados();
+});
+
+function actualizar_empleados() {
+    let id_empleado_actualizar = $('#id_empleado_actualizar').val();        
+    let nombre_empleado_actualizar = $('#nombre_empleado_actualizar').val();        
+    let correo_empleado_actualizar = $('#correo_empleado_actualizar').val();
+    let cede_empleado_actualizar = $('#cede_empleado_actualizar').val();
+    let Fecha_ingreso_empleado_actualizar = $('#fecha_ingreso_empleado_actualizar').val();
+    let cargo_empleado_actualizar = $('#cargo_empleado_actualizar').val();
+    let area_empleado_actualizar = $('#area_empleado_actualizar').val();
+    let estado_empleado_actualizar = $('#estado_empleado_actualizar').val();
+
+    if (nombre_empleado_actualizar === "" || cede_empleado_actualizar === "" || estado_empleado_actualizar==="") {
+        alert("Los campos obligatorios no deben ir vaios");
+        return;
+    }
+
+    // loading(true); // Puedes mostrar un indicador de carga aquí si lo necesitas
+    $.ajax({
+        url: "exe.php", // Archivo que procesará la solicitud
+        type: "POST", // Método de envío
+        dataType: "JSON", // Esperamos respuesta en formato JSON
+        data: {
+            run: 'empleados', // Parámetro 'run'
+            action: 'actualizar_empleados_js', // Parámetro 'action'
+            id_empleado_actualizar_json: id_empleado_actualizar, // Parámetro 'ID'
+            nombre_empleado_actualizar_json: nombre_empleado_actualizar, // Parámetro 'nombre_empleado_actualizar'
+            correo_empleado_actualizar_json: correo_empleado_actualizar, // Parámetro 'correo_empleado_actualizar'
+            cede_empleado_actualizar_json: cede_empleado_actualizar, // Parámetro 'cede_empleado_actualizar'
+            Fecha_ingreso_empleado_actualizar_json: Fecha_ingreso_empleado_actualizar, // Parámetro 'Fecha_ingreso_empleado_actualizar'
+            cargo_empleado_actualizar_json: cargo_empleado_actualizar, // Parámetro 'cargo_empleado_actualizar'
+            area_empleado_actualizar_json: area_empleado_actualizar, // Parámetro 'area_empleado_actualizar'
+            estado_empleado_actualizar_json: estado_empleado_actualizar, // Parámetro 'estado_empleado_actualizar'
+        },
+        success: function (response) {
+            if (response.success) {
+                obtener_datos_empleadosver();
+                alert(response.success);
+
+            } else {
+                alert(response.error);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            // Manejo de errores
+            if (jqXHR.status === 0) {
+                alert('No conectado: Verifica la red.');
+            } else if (jqXHR.status == 404) {
+                alert('Página no encontrada [404].');
+            } else if (jqXHR.status == 500) {
+                alert('Error interno del servidor [500].');
+            } else if (textStatus === 'parsererror') {
+                console.log(jqXHR.responseText);
+                alert('Error al analizar JSON.');
+            } else if (textStatus === 'timeout') {
+                alert('Error de tiempo de espera.');
+            } else if (textStatus === 'abort') {
+                alert('Solicitud Ajax abortada.');
+            } else {
+                console.log('Error no capturado: ' + jqXHR.responseText);
+            }
+        }
+    });
+}
+
+// esta funcion hace que se muestre los datos del empleado antes de actualizarlos
+function mostrar_datos_modalEmpleado(ID) {
+    console.log(ID);
+    $.ajax({
+        url: "exe.php",
+        type: "POST",
+        dataType: "JSON",
+        data: {
+            run: 'empleados',
+            action: 'obtenerempleado_unico_js', // Nueva acción para obtener un solo empleado
+            id_empleado_json: ID
+        },
+        success: function (data) {
+            // actualizar_empleados(ID);
+            // console.log("data : " + data + "si" + usuario);
+            if (data) {
+                // console.log(data);
+                $('#id_empleado_actualizar').val(data.ID);
+                $('#nombre_empleado_actualizar').val(data.nombres);
+                $('#correo_empleado_actualizar').val(data.correo);
+                $('#cede_empleado_actualizar').val(data.cede);
+                $('#fecha_ingreso_empleado_actualizar').val(data.Fecha_ingreso);
+                $('#cargo_empleado_actualizar').val(data.cargo);
+                $('#area_empleado_actualizar').val(data.area);
+                $('#estado_empleado_actualizar').val(data.estado); // Activo/Inactivo
+            } else {
+                alert('Error: No se pudieron obtener los datos del empleado.');
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert('Error al obtener los datos del empleado.');
         }
     });
 }

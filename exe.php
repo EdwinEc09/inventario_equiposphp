@@ -23,6 +23,14 @@ if (isset($_POST['run']) && isset($_POST['action'])) {
                     // Asegúrate de devolver los datos como JSON
                     echo json_encode($usuarios);
                     break; 
+                    // este obtiene un solo empleado para despues hacer la actualizacion
+                case 'obtenerempleado_unico_js':
+                    // Obtener los datos de la base de datos
+                    $empleados_unicos = $OS->obtenerempleado_unicojson($_POST['id_empleado_json']);
+                    
+                    // Asegúrate de devolver los datos como JSON
+                    echo json_encode($empleados_unicos);
+                    break; 
                     
                 case 'agregar_empleados_js':
                     $pasar_a_json = $OS->agregar_empleados_json(
@@ -34,6 +42,20 @@ if (isset($_POST['run']) && isset($_POST['action'])) {
                         $_POST['area_empleado_json']
                     );
                     echo json_encode($pasar_a_json);
+                    break;
+                    
+                case 'actualizar_empleados_js':
+                    $actualizar_empleados_a_json = $OS->actualizar_empleados_json(
+                        $_POST['id_empleado_actualizar_json'],
+                        $_POST['nombre_empleado_actualizar_json'],
+                        $_POST['correo_empleado_actualizar_json'],
+                        $_POST['cede_empleado_actualizar_json'],
+                        $_POST['Fecha_ingreso_empleado_actualizar_json'],
+                        $_POST['cargo_empleado_actualizar_json'],
+                        $_POST['area_empleado_actualizar_json'],
+                        $_POST['estado_empleado_actualizar_json']
+                    );
+                    echo json_encode($actualizar_empleados_a_json);
                     break;
 
                 default:

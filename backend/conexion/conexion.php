@@ -15,7 +15,6 @@ class OutSourcing
         // Establecer la zona horaria desde la conexion a la db para que llegue a todas las funciones
         date_default_timezone_set('America/Bogota');
 
-
         try {
             if (!isset($this->conexion)) {
                 $this->conexion = new PDO("sqlsrv:server=$this->host;database=$this->database", $this->user, $this->pass);
@@ -47,6 +46,32 @@ class OutSourcing
         }
     }
 
+// este es obtener los datos por medio de un parametro, en este casi el Id
+    public function obtenerempleado_unicojson($id_empleado_json)
+    {
+        $conn = $this->dbConnect();
+        if ($conn) {
+            // Preparar la consulta SQL para obtener un solo empleado
+            $sql = "SELECT * FROM empleados WHERE ID = ?";
+            $stmt = $conn->prepare($sql);
+
+            // Ejecutar la consulta con el parámetro de ID
+            $stmt->execute([$id_empleado_json]);
+
+            // Obtener un solo registro con fetch en lugar de fetchAll
+            $empleado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Verificar si se encontró el empleado
+            if ($empleado) {
+                return $empleado;
+            } else {
+                return ['error' => 'Empleado no encontrado.'];
+            }
+        } else {
+            return ['error' => 'Error al conectar con la base de datos.'];
+        }
+    }
+
 // este es para que me devuelva todos los datos de una tabla
     public function agregar_empleados_json($nombre_empleado_json, $correo_empleado_json, $cede_empleado_json, $Fecha_ingreso_empleado_json, $cargo_empleado_json, $area_empleado_json)
     {
@@ -69,6 +94,60 @@ class OutSourcing
                 return ['success' => 'Empleado agregado exitosamente.'];
             } else {
                 return ['error' => 'Error al insertar el empleado.'];
+            }
+        } else {
+            return ['error' => 'Error al conectar con la base de datos.'];
+        }
+    }
+// este es para que me devuelva todos los datos de una tabla
+    public function actualizar_empleados_json($id_empleado_actualizar_json, $nombre_empleado_actualizar_json, $correo_empleado_actualizar_json, $cede_empleado_actualizar_json, $Fecha_ingreso_empleado_actualizar_json, $cargo_empleado_actualizar_json, $area_empleado_actualizar_json, $estado_empleado_actualizar_json)
+    {
+        $conn = $this->dbConnect();
+
+        if ($conn) {
+            // Primero, obtenemos el estado actual del empleado en la base de datos
+            $sql_verificar = "SELECT estado FROM empleados WHERE ID = ?";
+            $stmt_verificar = $conn->prepare($sql_verificar);
+            $stmt_verificar->execute([$id_empleado_actualizar_json]);
+            $empleado = $stmt_verificar->fetch(PDO::FETCH_ASSOC);
+
+            // Verificar si el empleado fue encontrado
+            if ($empleado) {
+                $estado_actual = $empleado['estado']; // Estado actual del empleado (activo/inactivo)
+
+                // Si el empleado está inactivo y no se intenta activarlo, no permitir la actualización
+                if ($estado_actual == "0" && $estado_empleado_actualizar_json == "0") {
+                    return ['error' => 'El empleado está inactivo. No se pueden modificar otros campos mientras esté inactivo.'];
+                }
+
+                // Si se llega aquí, significa que:
+                // - El empleado está activo, o
+                // - Se está intentando cambiar su estado (de inactivo a activo o viceversa)
+
+                // Consulta para actualizar el empleado
+                $sql = "UPDATE empleados SET nombres = ?, correo = ?, cede = ?, Fecha_ingreso = ?, cargo = ?, area = ?, estado = ? WHERE ID = ?";
+                $stmt = $conn->prepare($sql);
+
+                // Ejecutar la consulta con los valores proporcionados
+                $stmt->execute([
+                    $nombre_empleado_actualizar_json,
+                    $correo_empleado_actualizar_json,
+                    $cede_empleado_actualizar_json,
+                    $Fecha_ingreso_empleado_actualizar_json,
+                    $cargo_empleado_actualizar_json,
+                    $area_empleado_actualizar_json,
+                    $estado_empleado_actualizar_json,
+                    $id_empleado_actualizar_json,
+                ]);
+
+                // Verificar si la actualización fue exitosa
+                if ($stmt->rowCount() > 0) {
+                    return ['success' => 'Empleado actualizado exitosamente.'];
+                } else {
+                    return ['error' => 'Error al actualizar el empleado.'];
+                }
+            } else {
+                return ['error' => 'Empleado no encontrado.'];
             }
         } else {
             return ['error' => 'Error al conectar con la base de datos.'];
