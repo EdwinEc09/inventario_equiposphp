@@ -2,7 +2,7 @@
 //     obtener_datos_empleadosver();
 // });
 
-function obtener_datos_empleadosver() { 
+function obtener_datos_empleadosver() {
     // loading(true); // Puedes mostrar un indicador de carga aquí si lo necesitas
     $.ajax({
         url: "exe.php", // Archivo que procesará la solicitud
@@ -42,10 +42,10 @@ function obtener_datos_empleadosver() {
                             <td class="py-3">${estadoBadge}</td>
                             <td class="py-3">
                                 <div class="position-relative">
-                                    <a style="margin-right: 7px;" class="link-dark d-inline-block" title="Editar empleados" href="#editar-empleados" value="${usuario.ID}" onclick="mostrar_datos_modalEmpleado(${usuario.ID})" data-toggle="modal" data-target="#modalactualizarempleados">
+                                    <a style="margin-right: 7px;" class="link-dark d-inline-block" title="Editar empleados" href="#" value="${usuario.ID}" onclick="mostrar_datos_modalEmpleado(${usuario.ID})" data-toggle="modal" data-target="#modalactualizarempleados">
                                         <i class="gd-reload icon-text"></i>
                                     </a>
-                                    <a class="link-dark d-inline-block" title="Ver mas informacion" href="#mas-info-empleados">
+                                    <a class="link-dark d-inline-block" title="Ver mas informacion" href="#" onclick="mostrar_masinfo_modalEmpleado(${usuario.ID})">
                                         <i class="gd-eye icon-text"></i>
                                     </a>
                               
@@ -150,7 +150,7 @@ function agregar_empleados() {
                 $('#alerta_agregar_empleadoshtml').html(alerta_agregar_empleados);
 
                 // Remover la alerta después de 5 segundos
-                setTimeout(function() {
+                setTimeout(function () {
                     $('.alert').alert('close');
                 }, 5000);
 
@@ -190,8 +190,8 @@ $('#btn_actualizar_empleados').on('click', function () {
 });
 
 function actualizar_empleados() {
-    let id_empleado_actualizar = $('#id_empleado_actualizar').val();        
-    let nombre_empleado_actualizar = $('#nombre_empleado_actualizar').val();        
+    let id_empleado_actualizar = $('#id_empleado_actualizar').val();
+    let nombre_empleado_actualizar = $('#nombre_empleado_actualizar').val();
     let correo_empleado_actualizar = $('#correo_empleado_actualizar').val();
     let cede_empleado_actualizar = $('#cede_empleado_actualizar').val();
     let Fecha_ingreso_empleado_actualizar = $('#fecha_ingreso_empleado_actualizar').val();
@@ -199,7 +199,7 @@ function actualizar_empleados() {
     let area_empleado_actualizar = $('#area_empleado_actualizar').val();
     let estado_empleado_actualizar = $('#estado_empleado_actualizar').val();
 
-    if (nombre_empleado_actualizar === "" || cede_empleado_actualizar === "" || estado_empleado_actualizar==="") {
+    if (nombre_empleado_actualizar === "" || cede_empleado_actualizar === "" || estado_empleado_actualizar === "") {
         alert("Los campos obligatorios no deben ir vaios");
         return;
     }
@@ -285,4 +285,11 @@ function mostrar_datos_modalEmpleado(ID) {
             alert('Error al obtener los datos del empleado.');
         }
     });
+}
+
+
+
+// este es para implementar la funcionalidad de que se puedan ver los detalles del empleado como el que usuario lo registro y etc..
+function mostrar_masinfo_modalEmpleado(ID) {
+    alert("esto es para ver mas informacion del ID: " + ID)
 }
