@@ -291,5 +291,5 @@ function mostrar_datos_modalEmpleado(ID) {
 
 // este es para implementar la funcionalidad de que se puedan ver los detalles del empleado como el que usuario lo registro y etc..
 function mostrar_masinfo_modalEmpleado(ID) {
-    alert("esto es para ver mas informacion del ID: " + ID)
+    alert("esto es para ver mas informacion del ID: " + ID);
 }

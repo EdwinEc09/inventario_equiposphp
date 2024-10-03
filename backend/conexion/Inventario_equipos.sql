@@ -25,6 +25,7 @@ create table empleados (
 		area char(30) null,
 		estado bit NOT NULL 
 );
+
 select * from empleados;
 
 select distinct ID,nombres from empleados where  estado = 1;
@@ -33,6 +34,7 @@ select distinct ID,nombres from empleados where  estado = 1;
 insert into empleados (nombres, correo,cede, fecha_creacion,Fecha_ingreso,cargo,area, estado) values ('ANDRES BUSTAMANTE','andres@gmail.com','barannquilla', '2024-05-01','2024-01-01','practicante TI','TI',1);
 insert into empleados (nombres, correo,cede, fecha_creacion,Fecha_ingreso,cargo,area, estado) values ('CESAR PALLARES','cesar@gmail.com','monteria','2024-05-01','2024-01-01','auxiliar TI','TI',0);
 
+UPDATE empleados SET nombres = 'paopo12' ,correo = 'papo@1', cede ='cota' ,Fecha_ingreso='2024-05-01', cargo ='cordinador',area='mercadeo',estado=1 WHERE ID = 1;
 
 /*este es para equipos*/
 
