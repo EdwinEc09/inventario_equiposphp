@@ -404,7 +404,10 @@
 
 <!-- incluir el modal para agregar tipos de equipos -->
 <?php
- include 'equipos/ajustesequipos/modaltipos.html';
+ include 'equipos/ajustesequipos/modaltipos.php';
+
+//  importar el archivo de modales de empleados
+include 'usuario/modalesempleados.html';
  ?>
 
 

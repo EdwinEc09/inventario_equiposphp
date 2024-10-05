@@ -19,7 +19,7 @@
         <div class="mb-3 mb-md-4 d-flex justify-content-between">
             <div class="h3 mb-0">Agregar nuevo equipo</div>
         </div>
-
+ 
 
         <!-- Form -->
         <div>

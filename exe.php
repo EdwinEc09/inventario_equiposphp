@@ -105,6 +105,29 @@ if (isset($_POST['run']) && isset($_POST['action'])) {
                         );
                         echo json_encode($pasar_equipos_a_json);
                         break;
+                case 'actualizar_equipo_js':
+                    $pasar_actualizar_equipo_a_json = $OS->actualizar_equipo_json(
+                            $_POST['id_equipo_actualizar_json'],
+                            $_POST['tipo_equipo_actualizar_json'],
+                            $_POST['marca_equipo_actualizar_json'],
+                            $_POST['serial_equipo_actualizar_json'],
+                            $_POST['dire_mac_wifi_equipo_actualizar_json'],
+                            $_POST['dire_mac_ethernet_equipo_actualizar_json'],
+                            $_POST['imei1_equipo_actualizar_json'],
+                            $_POST['imei2_equipo_actualizar_json'],
+                            $_POST['estado_equipo_actualizar_json'],
+                            $_POST['observacion_equipo_actualizar_json']
+                        );
+                        echo json_encode($pasar_actualizar_equipo_a_json);
+                        break;
+                        
+                case 'obtenerequipo_unico_js':
+                            // Obtener los datos de la base de datos
+                        $equipos_unicos = $OS->obtenerequipo_unicojson($_POST['id_quipo_json']);
+                            
+                            // Asegúrate de devolver los datos como JSON
+                        echo json_encode($equipos_unicos);
+                        break; 
 
                         // agregar tipos de equipos
                 case 'agregar_tiposequipos_json':
