@@ -179,6 +179,32 @@ class OutSourcing
         }
     }
 
+     // este es para listar los empleados y se guarde la asinacion
+     public function empleados_listar_combo()
+     {
+         $conn = $this->dbConnect(); // Asegúrate de que dbConnect devuelve la conexión
+         if ($conn) {
+             $sql = "SELECT distinct ID,nombres,cargo from empleados where  estado = 1;";
+             // select distinct ID,marca,serial from equipos where  tipo not in ('');
+             $query = $conn->prepare($sql);
+             $query->execute();
+             $result = $query->fetchAll(PDO::FETCH_OBJ);
+ 
+             // Verifica si la consulta devolvió algún resultado
+             if (!$result) {
+                 return [];
+             } else {
+                 return $result;
+             }
+         } else {
+             // Si no hay conexión, retorna un error o una lista vacía
+             return [];
+         }
+     }
+
+
+    //  fin empleados
+
     // OBTENER EQUIPOS
     public function obtenerequiposjson()
     {
@@ -439,28 +465,7 @@ class OutSourcing
             return [];
         }
     }
-    // este es para listar los empleados y se guarde la asinacion
-    public function empleados_listar_combo()
-    {
-        $conn = $this->dbConnect(); // Asegúrate de que dbConnect devuelve la conexión
-        if ($conn) {
-            $sql = "SELECT distinct ID,nombres,cargo from empleados where  estado = 1;";
-            // select distinct ID,marca,serial from equipos where  tipo not in ('');
-            $query = $conn->prepare($sql);
-            $query->execute();
-            $result = $query->fetchAll(PDO::FETCH_OBJ);
-
-            // Verifica si la consulta devolvió algún resultado
-            if (!$result) {
-                return [];
-            } else {
-                return $result;
-            }
-        } else {
-            // Si no hay conexión, retorna un error o una lista vacía
-            return [];
-        }
-    }
+   
 
     // asignaciones------------
     // OBTENER EQUIPOS

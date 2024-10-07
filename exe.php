@@ -1,6 +1,6 @@
 <?php
 include 'backend/conexion/conexion.php'; // Incluir la clase que maneja la conexión y funciones
-include 'backend/php/empleadosback.php';
+// include 'backend/conexion/empleados.php';
 session_start();
 
 $OS = new OutSourcing(); // Instancia de la clase
