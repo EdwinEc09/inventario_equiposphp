@@ -42,10 +42,10 @@ function obtener_datos_equipos() {
                              <td class="py-3">${equiposver.estado}</td>
                             <td class="py-3">
                                 <div class="position-relative">
-                                    <a class="link-dark d-inline-block" href="#" value="${equiposver.ID}" onclick="mostrar_datos_modalEquipos(${equiposver.ID})" data-toggle="modal" data-target="#modalactualizarequipos" >
+                                    <a class="link-dark d-inline-block" href="#" value="${equiposver.ID}" onclick="mostrar_datos_modalEquipos(${equiposver.ID})" title="Editar Equipos" data-toggle="modal" data-target="#modalactualizarequipos" >
                                         <i class="gd-reload icon-text"></i>
                                     </a>
-                                    <a class="link-dark d-inline-block" href="#" onclick="mostrar_masinfo_modalEquipos(${equiposver.ID})">
+                                    <a class="link-dark d-inline-block" href="#" title="Ver mas Informacion" onclick="mostrar_masinfo_modalEquipos(${equiposver.ID})">
                                         <i class="gd-eye icon-text"></i>
                                     </a>
                               
@@ -246,7 +246,7 @@ function actualizar_equipos() {
         },
         success: function (response) {
             if (response.success) {
-                obtener_datos_equipos();
+                obtener_datos_equipos(); 
                 alert(response.success);
 
             } else {
