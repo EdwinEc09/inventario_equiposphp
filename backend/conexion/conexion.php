@@ -492,7 +492,6 @@ class OutSourcing
             // $fecha_creacion_json = date("Y-m-d h:i:s A");
             // Obtener la fecha y hora actuales
             $fecha_creacion_json = date("Y-m-d H:i:s");
-
             // Estado de asignación: 1 = Activo/Asignado
             $estado_asignacion_json = 1;
 
