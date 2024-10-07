@@ -67,6 +67,8 @@ insert into equipos (tipo, marca, serial, direccion_mac_wifi, direccion_mac_ethe
 
 UPDATE equipos SET estado = 'Disponible' WHERE estado  = 'Asignado';
 UPDATE equipos SET estado = 'Asignado' WHERE ID = 2;
+UPDATE equipos SET tipo = ?, marca = ?, serial = ?, direccion_mac_wifi = ?, direccion_mac_ethenet = ?, imei1 = ?, imei2 = ?,estado =?,observacion =? WHERE ID = ?
+
 /*este es para el estado de equipos*/
 DROP TABLE estado_equipos;
 
