@@ -72,6 +72,32 @@ class OutSourcing
         }
     }
 // este es obtener los datos por medio de un parametro, en este casi el Id
+    public function obtenerempleado_correojson()
+    {
+        $conn = $this->dbConnect();
+        if ($conn) {
+            $id_empleado_correo_json = 1;
+            // Preparar la consulta SQL para obtener un solo empleado
+            $sql = "SELECT correo FROM empleados WHERE ID = ?";
+            $stmt = $conn->prepare($sql);
+
+            // Ejecutar la consulta con el parámetro de ID
+            $stmt->execute([$id_empleado_correo_json]);
+
+            // Obtener un solo registro con fetch en lugar de fetchAll
+            $equipo = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Verificar si se encontró el empleado
+            if ($equipo) {
+                return $equipo;
+            } else {
+                return ['error' => 'Correo no encontrado.'];
+            }
+        } else {
+            return ['error' => 'Error al conectar con la base de datos.'];
+        }
+    }
+// este es obtener los datos por medio de un parametro, en este casi el Id
     public function obtenerequipo_unicojson($id_quipo_json)
     {
         $conn = $this->dbConnect();

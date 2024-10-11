@@ -11,7 +11,8 @@
             </ol>
         </nav>
         <!-- End Breadcrumb -->
-        <button id="obtener_datos_usuarios" type="submit" class="btn btn-primary float-right">Buscar</button>
+         <!-- boton para enviar correo desde emailjs  -->
+        <button id="btn-enviar-correo" type="submit" class="btn btn-primary float-right">Enviar correo</button>
         <!--  -->
         <div class="mb-3 mb-md-4 d-flex justify-content-between">
             <div class="h3 mb-0">Empleados</div>
@@ -23,7 +24,7 @@
             <table class="table text-nowrap mb-0" >
                 <thead>
                     <tr>
-                        <th class="font-weight-semi-bold border-top-0 py-2">#</th>
+                        <th class="font-weight-semi-bold border-top-0 py-2"><button type="button">#</button></th>
                         <th class="font-weight-semi-bold border-top-0 py-2">Nombre</th>
                         <th class="font-weight-semi-bold border-top-0 py-2">Correo</th>
                         <th class="font-weight-semi-bold border-top-0 py-2">cede</th>

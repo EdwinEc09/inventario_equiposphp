@@ -430,6 +430,7 @@ include 'usuario/modalesempleados.html';
     <script src="backend/js/asignaciones.js"></script>
     <script src="backend/js/ajustesequipos.js"></script>
     <script src="backend/js/onload_todos.js"></script>
+    <script src="backend/js/envio_correo.js"></script>
     <script>
     $.GDCore.components.GDChartistArea.init('.js-area-chart');
     $.GDCore.components.GDChartistBar.init('.js-bar-chart');
@@ -466,4 +467,12 @@ include 'usuario/modalesempleados.html';
     } */
 </style>
 
+<!-- este es solo para el correo con emailjs -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script type="text/javascript">
+        (function(){
+            emailjs.init("ImfaOHer9BoeUbvrx");  // Asegúrate de que este es tu User ID correcto
+        })();
+    </script>
 </html>

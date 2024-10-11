@@ -31,6 +31,14 @@ if (isset($_POST['run']) && isset($_POST['action'])) {
                     // Asegúrate de devolver los datos como JSON
                     echo json_encode($empleados_unicos);
                     break;
+                // este obtiene un solo correo para despues hacer el envio del correo
+                case 'obtenerempleados_correos':
+                    // Obtener los datos de la base de datos
+                    $empleados_correo = $OS->obtenerempleado_correojson();
+
+                    // Asegúrate de devolver los datos como JSON
+                    echo json_encode($empleados_correo);
+                    break;
 
                 case 'agregar_empleados_js':
                     $pasar_a_json = $OS->agregar_empleados_json(

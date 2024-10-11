@@ -2,6 +2,7 @@
 //     obtener_datos_empleadosver();
 // });
 
+
 function obtener_datos_empleadosver() {
     // loading(true); // Puedes mostrar un indicador de carga aquí si lo necesitas
     $.ajax({
@@ -31,7 +32,7 @@ function obtener_datos_empleadosver() {
 
                     var fila = `
                         <tr>
-                            <td class="py-3">${index + 1}</td>
+                            <td class="py-3"><input type="checkbox" name="elejir_empleados"   onclick="elejir_empleados(${usuario.ID})"></td>
                             <td class="align-middle py-3">${usuario.nombres}</td>
                             <td class="py-3">${usuario.correo}</td>
                             <td class="py-3">${usuario.cede}</td>
@@ -56,6 +57,7 @@ function obtener_datos_empleadosver() {
 
                     // Añade la fila generada al tbody
                     $('#tabla_usuarios').append(fila);
+                    // console.log("este es index: " +usuario.ID)
                 });
             }
         },
@@ -80,11 +82,6 @@ function obtener_datos_empleadosver() {
         }
     });
 }
-// window.onload = function () {
-//     obtener_datos_empleadosver()
-//     obtener_datos_equipos()
-// }
-
 
 // ------------------------------------------------------------------
 // agregar un empleado
@@ -292,4 +289,10 @@ function mostrar_datos_modalEmpleado(ID) {
 // este es para implementar la funcionalidad de que se puedan ver los detalles del empleado como el que usuario lo registro y etc..
 function mostrar_masinfo_modalEmpleado(ID) {
     alert("esto es para ver mas informacion del ID: " + ID);
+}
+
+
+// este es para elejir por medio del chetsbox a los empleados
+function elejir_empleados(ID){
+    console.log("este es desde onclick: " + ID)
 }
