@@ -1,8 +1,12 @@
 <?php
 // require 'backend/conexion/conexion.php';
 include 'backend/conexion/conexion.php';
-$OS = new OutSourcing();
+include 'backend/php/empleadosback.php';
+include 'backend/php/equiposback.php';
 
+$OS = new OutSourcing();
+$EmpleadosOS = new Empleados(); // Instancia de la clase
+$EquiposOS = new Equipos(); // Instancia de la clase 
 // Incluir configuración global
 // require 'settings.php';
 

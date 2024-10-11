@@ -30,7 +30,7 @@
                     <select id="empleado_asignacion" name="empleado_asignacion" class="form-control">
                         <?php
                             // Llamamos a la función para obtener los estados
-                            $empleados_asignar = $OS->empleados_listar_combo();
+                            $empleados_asignar = $EmpleadosOS->empleados_listar_combo();
                             if ($empleados_asignar) {
                                 echo '<option value="">Seleccionar</option>';
                                 // Itera sobre los resultados y genera las opciones
@@ -49,7 +49,7 @@
                     <select id="equipo_asignacion" name="equipo_asignacion" class="form-control">
                         <?php
                             // Llamamos a la función para obtener los estados
-                            $equipos_asignar = $OS->equipos_listar_combo();
+                            $equipos_asignar = $EquiposOS->equipos_listar_combo();
                             if ($equipos_asignar) {
                                 echo '<option value="">Seleccionar</option>';
                                 // Itera sobre los resultados y genera las opciones

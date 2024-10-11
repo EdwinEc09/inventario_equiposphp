@@ -467,7 +467,7 @@ include 'usuario/modalesempleados.html';
     } */
 </style>
 
-<!-- este es solo para el correo con emailjs -->
+<!-- este es solo para el -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <script type="text/javascript">
