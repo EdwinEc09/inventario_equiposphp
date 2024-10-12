@@ -46,8 +46,11 @@ function obtener_datos_empleadosver() {
                                     <a style="margin-right: 7px;" class="link-dark d-inline-block" title="Editar empleados" href="#" value="${usuario.ID}" onclick="mostrar_datos_modalEmpleado(${usuario.ID})" data-toggle="modal" data-target="#modalactualizarempleados">
                                         <i class="gd-reload icon-text"></i>
                                     </a>
-                                    <a class="link-dark d-inline-block" title="Ver mas informacion" href="#" onclick="mostrar_masinfo_modalEmpleado(${usuario.ID})">
+                                    <a style="margin-right: 7px; class="link-dark d-inline-block" title="Ver mas informacion" href="#" onclick="mostrar_masinfo_modalEmpleado(${usuario.ID})">
                                         <i class="gd-eye icon-text"></i>
+                                    </a>
+                                    <a  style="margin-right: 7px; class="link-dark d-inline-block" title="Enviar correo" href="#" onclick="mostrar_masinfo_modalEmpleado(${usuario.ID})">
+                                        <i class="gd-email icon-text"></i>
                                     </a>
                               
                                 </div>
