@@ -34,33 +34,6 @@ class Empleados extends OutSourcing
         }
     }
 
-// este es obtener los datos por medio de un parametro, en este casi el Id
-    public function obtenerempleado_correojson()
-    {
-        $conn = $this->dbConnect();
-        if ($conn) {
-            $id_empleado_correo_json = 1;
-            // Preparar la consulta SQL para obtener un solo empleado
-            $sql = "SELECT correo FROM empleados WHERE ID = ?";
-            $stmt = $conn->prepare($sql);
-
-            // Ejecutar la consulta con el parámetro de ID
-            $stmt->execute([$id_empleado_correo_json]);
-
-            // Obtener un solo registro con fetch en lugar de fetchAll
-            $equipo = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            // Verificar si se encontró el empleado
-            if ($equipo) {
-                return $equipo;
-            } else {
-                return ['error' => 'Correo no encontrado.'];
-            }
-        } else {
-            return ['error' => 'Error al conectar con la base de datos.'];
-        }
-    }
-
 // este es para que me devuelva todos los datos de una tabla
     public function agregar_empleados_json($nombre_empleado_json, $correo_empleado_json, $cede_empleado_json, $Fecha_ingreso_empleado_json, $cargo_empleado_json, $area_empleado_json)
     {
@@ -167,6 +140,37 @@ class Empleados extends OutSourcing
         }
     }
 
-    //  fin empleados
+// este es obtener los datos por medio de un parametro, en este casi el Id
+    public function obtenerempleado_correojson($ids)
+    {
+        $conn = $this->dbConnect();
+        if ($conn) {
+            // Si $ids es un array, convierte cada ID en un entero
+            $ids = array_map('intval', $ids);
 
+            // Crea un marcador de posición para cada ID
+            $placeholders = implode(',', array_fill(0, count($ids), '?'));
+
+            // Preparar la consulta SQL para obtener varios correos con IN
+            $sql = "SELECT correo FROM empleados WHERE ID IN ($placeholders)";
+            $stmt = $conn->prepare($sql);
+
+            // Ejecutar la consulta con los IDs
+            $stmt->execute($ids);
+
+            // Obtener todos los registros con fetchAll
+            $correos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Verificar si se encontraron empleados
+            if ($correos) {
+                return $correos;
+            } else {
+                return ['error' => 'Correos no encontrados.'];
+            }
+        } else {
+            return ['error' => 'Error al conectar con la base de datos.'];
+        }
+    }
+
+    //  fin empleados
 }

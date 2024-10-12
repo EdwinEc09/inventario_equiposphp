@@ -32,7 +32,7 @@ function obtener_datos_empleadosver() {
 
                     var fila = `
                         <tr>
-                            <td class="py-3"><input type="checkbox" name="elejir_empleados"   onclick="elejir_empleados(${usuario.ID})"></td>
+                            <td class="py-3"><input type="checkbox" name="id_correo_enviar[]"value="${usuario.ID}" ></td>
                             <td class="align-middle py-3">${usuario.nombres}</td>
                             <td class="py-3">${usuario.correo}</td>
                             <td class="py-3">${usuario.cede}</td>
@@ -188,8 +188,8 @@ $('#btn_actualizar_empleados').on('click', function () {
 
 function actualizar_empleados() {
     let id_empleado_actualizar = $('#id_empleado_actualizar').val();
-    let nombre_empleado_actualizar = $('#nombre_empleado_actualizar').val();
-    let correo_empleado_actualizar = $('#correo_empleado_actualizar').val();
+    let nombre_empleado_actualizar = $('#nombre_empleado_actualizar').val().trim();
+    let correo_empleado_actualizar = $('#correo_empleado_actualizar').val().trim();
     let cede_empleado_actualizar = $('#cede_empleado_actualizar').val();
     let Fecha_ingreso_empleado_actualizar = $('#fecha_ingreso_empleado_actualizar').val();
     let cargo_empleado_actualizar = $('#cargo_empleado_actualizar').val();
@@ -292,7 +292,117 @@ function mostrar_masinfo_modalEmpleado(ID) {
 }
 
 
-// este es para elejir por medio del chetsbox a los empleados
-function elejir_empleados(ID){
-    console.log("este es desde onclick: " + ID)
+
+// Evento para seleccionar o deseleccionar todos los checkboxes ademas de anviar el valor a la db
+$('#seleccionarTodos').on('click', function () {
+    // Obtener el estado actual de todos los checkboxes
+    let todosSeleccionados = $('input[name="id_correo_enviar[]"]').length === $('input[name="id_correo_enviar[]"]:checked').length;
+
+    // Marcar o desmarcar todos los checkboxes
+    $('input[name="id_correo_enviar[]"]').prop('checked', !todosSeleccionados);
+
+    // Verificar si al menos un checkbox está seleccionado
+    let seleccionados = $('input[name="id_correo_enviar[]"]:checked').length > 0;
+    $('#btn-enviar-correo').prop('disabled', !seleccionados);
+});
+
+// Evento para detectar cambios individuales en los checkboxes
+$(document).on('change', 'input[name="id_correo_enviar[]"]', function () {
+    let seleccionados = $('input[name="id_correo_enviar[]"]:checked').length > 0;
+    $('#btn-enviar-correo').prop('disabled', !seleccionados);
+});
+
+// Evento al hacer clic en el botón "Enviar"
+$('#btn-enviar-correo').on('click', function () {
+    let idsSeleccionados = $('input[name="id_correo_enviar[]"]:checked').map(function () {
+        return $(this).val();
+    }).get();
+
+    if (idsSeleccionados.length > 0) {
+        obtener_datos_correos(idsSeleccionados);
+        // alert("si tienes ID seleccionados y son: " + idsSeleccionados);
+    } else {
+        alert("No has seleccionado ningún empleado.");
+    }
+});
+
+function obtener_datos_correos(idsSeleccionados) {
+    // loading(true); // Puedes mostrar un indicador de carga aquí si lo necesitas
+    if (idsSeleccionados.length > 0) {
+        $.ajax({
+            url: "exe.php", // Archivo que procesará la solicitud
+            type: "POST", // Método de envío
+            dataType: "JSON", // Esperamos respuesta en formato JSON
+            data: {
+                run: 'empleados', // Parámetro 'run'
+                action: 'obtenerempleados_correos', // Parámetro 'action'
+                ids: idsSeleccionados // Enviar los IDs seleccionados
+            },
+            success: function (data) {
+                // loading(false); // Quitar el indicador de carga
+                if (data.error) {
+                    alert('Error: ' + data.error); // Mostrar mensaje de error si existe
+
+                } else {
+                    // contenedro_correo = data;
+                    // alert("se envio el correo: " + contenedro_correo);
+                    // console.log(data);
+                    enviar_correo(data);
+                }
+
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                // Manejo de errores
+                if (jqXHR.status === 0) {
+                    alert('No conectado: Verifica la red.');
+                } else if (jqXHR.status == 404) {
+                    alert('Página no encontrada [404].');
+                } else if (jqXHR.status == 500) {
+                    alert('Error interno del servidor [500].');
+                } else if (textStatus === 'parsererror') {
+                    console.log(jqXHR.responseText);
+                    alert('Error al analizar JSON.');
+                } else if (textStatus === 'timeout') {
+                    alert('Error de tiempo de espera.');
+                } else if (textStatus === 'abort') {
+                    alert('Solicitud Ajax abortada.');
+                } else {
+                    console.log('Error no capturado: ' + jqXHR.responseText);
+                }
+            }
+        });
+    } else {
+        alert("No has seleccionado ningún empleado.");
+    }
 }
+
+
+function enviar_correo(data) {
+    // Obtener los correos del formulario
+    // var toEmail = document.getElementById('toEmail').value;
+    // var ccEmail = document.getElementById('ccEmail').value; // Este es opcional
+    // var from_Message = document.getElementById('from_message').value; // Este es opcional
+
+    // Convertir el array de correos en una cadena separada por comas
+    var toEmails = data.map(function (empleado) {
+        return empleado.correo; // Asumiendo que data contiene un array de objetos con un campo 'correo'
+    }).join(',');
+
+    // console.log(toEmails);
+    var templateParams = {
+        toEmail: toEmails,
+        nombre_persona: 'Mega',
+        // cc_email: 'escorciacaballeroe@gmail.com', // Agregar el correo en copia
+        message: 'este es un correo probando desde base de datos en inventario'
+    };
+
+    // Enviar el correo usando EmailJS
+    emailjs.send('service_cyxzs99', 'template_ea43mm9', templateParams)
+        .then(function (response) {
+            alert('Correo enviado con éxito!' + toEmails, response.status, response.text);
+        }, function (error) {
+            alert('Error al enviar el correo: ' + JSON.stringify(error));
+        });
+}
+

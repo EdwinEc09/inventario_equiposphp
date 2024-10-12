@@ -29,7 +29,7 @@ create table empleados (
 select * from empleados;
 
 select distinct ID,nombres from empleados where  estado = 1;
-/*select distinct ID,nombres from empleados where  nombres not in ('');*/
+select  correo from empleados where  ID  in ('1','2');
 
 insert into empleados (nombres, correo,cede, fecha_creacion,Fecha_ingreso,cargo,area, estado) values ('ANDRES BUSTAMANTE','andres@gmail.com','barannquilla', '2024-05-01','2024-01-01','practicante TI','TI',1);
 insert into empleados (nombres, correo,cede, fecha_creacion,Fecha_ingreso,cargo,area, estado) values ('CESAR PALLARES','cesar@gmail.com','monteria','2024-05-01','2024-01-01','auxiliar TI','TI',0);
