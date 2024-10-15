@@ -4,7 +4,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Actualizar empleados</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Actualizar
+                    empleados</h5>
                 <button type="button" class="close" data-dismiss="modal"
                     aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -15,7 +16,7 @@
                 <div>
                     <div class="form-row">
                         <div id="id_empleado_actualizar">
-                        <!-- <div id="id_empleado_actualizar" class="form-group col-12 col-md-6"> -->
+                            <!-- <div id="id_empleado_actualizar" class="form-group col-12 col-md-6"> -->
                             <!-- <label for="id_empleado_actualizar">ID</label> -->
                             <!-- <input type="text" class="form-control" value
                                 id="id_empleado_actualizar"
@@ -23,7 +24,8 @@
                                 placeholder="Nombre del Empleado"> -->
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="nombre_empleado_actualizar">Nombre</label>
+                            <label
+                                for="nombre_empleado_actualizar">Nombre</label>
                             <input type="text" class="form-control" value
                                 id="nombre_empleado_actualizar"
                                 name="nombre_empleado_actualizar>"
@@ -47,12 +49,16 @@
                                 placeholder="Cede del Empleado">
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="fecha_ingreso_empleado_actualizar">Fecha de ingreso</label>
-                            <input type="date" class="form-control" id="fecha_ingreso_empleado_actualizar" name="fecha_ingreso_empleado_actualizar">
+                            <label for="fecha_ingreso_empleado_actualizar">Fecha
+                                de ingreso</label>
+                            <input type="date" class="form-control"
+                                id="fecha_ingreso_empleado_actualizar"
+                                name="fecha_ingreso_empleado_actualizar">
                         </div>
                         <div class="form-group col-12 col-md-6">
                             <label
-                                for="cargo_empleado_actualizar">Cargo de Empleado</label>
+                                for="cargo_empleado_actualizar">Cargo de
+                                Empleado</label>
                             <input type="text" class="form-control" value
                                 id="cargo_empleado_actualizar"
                                 name="cargo_empleado_actualizar"
@@ -60,7 +66,8 @@
                         </div>
                         <div class="form-group col-12 col-md-6">
                             <label
-                                for="area_empleado_actualizar">Area del Empleado</label>
+                                for="area_empleado_actualizar">Area del
+                                Empleado</label>
                             <input type="text" class="form-control" value
                                 id="area_empleado_actualizar"
                                 name="area_empleado_actualizar"
@@ -91,7 +98,155 @@
                 <button type="button" class="btn btn-secondary"
                     data-dismiss="modal">Cerrar</button>
                 <button type="button" id="btn_actualizar_empleados"
-                    class="btn btn-primary">Actualizar <i class="gd-save icon-text"></i></button>
+                    class="btn btn-primary">Actualizar <i
+                        class="gd-save icon-text"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal actualizar varios estados de empleados verempleados.php -->
+<div id="modalactualizarvariosestadosempleados" class="modal fade" role="dialog"
+    aria-labelledby="modalactualizarvariosestadosempleados" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Actualizar varios
+                    empleados</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Form -->
+                <div>
+                    <div class="form-row">
+                        <div id="id_empleado_actualizar_varios">
+                            <!-- <div id="id_empleado_actualizar" class="form-group col-12 col-md-6"> -->
+                            <!-- <label for="id_empleado_actualizar">ID</label> -->
+                            <!-- <input type="text" class="form-control" value
+                                id="id_empleado_actualizar"
+                                name="<id_empleado_actualizar>"
+                                placeholder="Nombre del Empleado"> -->
+                        </div>
+
+                        <div class="form-group col-12 col-md-12">
+                            <label
+                                for="estado_empleado_actualizar_varios">Estado
+                                de
+                                Empleado</label>
+                            <select id="estado_empleado_actualizar_varios"
+                                name="estado_empleado_actualizar_varios"
+                                class="form-control">
+                                <option value>Seleccionar</option>
+                                <option value="0">Inactivo</option>
+                                <option value="1">Activo</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <!-- End Form -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Cerrar</button>
+                    <button type="button"
+                        id="btn_actualizar_varios_estados_empleados"
+                        class="btn btn-primary">Actualizar <i
+                            class="gd-save icon-text"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal ver mas informacion empleados verempleados.php -->
+<div id="modalvermasinformacionempleados" class="modal fade" role="dialog"
+    aria-labelledby="modalvermasinformacionempleados" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detalles del
+                    Empleado</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Form -->
+                <div class="form-row">
+                    <div class="form-group col-6 col-md-6">
+                        <label for="id_motrarmasinfo_empleados">Id del
+                            empleado</label>
+                        <div class="input-group">
+
+                            <input type="text"
+                                class="form-control form-control-onfocus-inherit bg-transparent small text-muted"
+                                value="este es un texxto 1"
+                                id="id_motrarmasinfo_empleados"
+                                readonly>
+                        </div>
+                    </div>
+                    <!-- ESTE ES PARA EL segundo campo -->
+                    <div class="form-group col-6 col-md-6">
+                        <label for="id_motrarmasinfo_empleados">Estado del
+                            empleado</label>
+                        <div class="input-group">
+                            <input type="text"
+                                class="form-control form-control-onfocus-inherit bg-transparent small text-muted"
+                                value="este es un texxto 3"
+                                id="estado_motrarmasinfo_empleados"
+                                readonly>
+                        </div>
+                    </div>
+                    <div class="form-group col-6 col-md-6">
+                        <!-- ESTE ES EL PRIMER CAMPO -->
+                        <label for="id_motrarmasinfo_empleados">Fecha de
+                            creacion del empleado</label>
+                        <div class="input-group">
+                            <input type="text"
+                                class="form-control form-control-onfocus-inherit bg-transparent small text-muted"
+                                value="este es un texxto 1"
+                                id="fecha_creacion_motrarmasinfo_empleados"
+                                readonly>
+                        </div>
+                    </div>
+
+                    <!-- ESTE ES PARA EL SEGUNDO CAMPO -->
+                    <div class="form-group col-6 col-md-6">
+                        <label for="id_motrarmasinfo_empleados">Fecha que
+                            ingreso el empleado</label>
+                        <div class="input-group">
+                            <input type="text"
+                                class="form-control form-control-onfocus-inherit bg-transparent small text-muted"
+                                value="este es un texxto 2"
+                                id="Fecha_ingreso_motrarmasinfo_empleados"
+                                readonly>
+
+                            <!-- <div
+                                        class="input-group-append input-group-append-simple">
+                                        <a
+                                            class="input-group-text bg-transparent text-muted"
+                                            href="#">
+                                            <i
+                                                class="gd-layers icon-text icon-text-sm"></i>
+                                        </a>
+                                    </div> -->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End Form -->
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Cerrar</button>
+
+                </div>
             </div>
         </div>
     </div>

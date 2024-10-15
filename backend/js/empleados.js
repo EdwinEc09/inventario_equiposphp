@@ -32,7 +32,7 @@ function obtener_datos_empleadosver() {
 
                     var fila = `
                         <tr>
-                            <td class="py-3"><input type="checkbox" name="id_correo_enviar[]"value="${usuario.ID}" ></td>
+                            <td class="py-3"><input type="checkbox" name="id_correo_enviar[]" value="${usuario.ID}"></td>
                             <td class="align-middle py-3">${usuario.nombres}</td>
                             <td class="py-3">${usuario.correo}</td>
                             <td class="py-3">${usuario.cede}</td>
@@ -46,7 +46,7 @@ function obtener_datos_empleadosver() {
                                     <a style="margin-right: 7px;" class="link-dark d-inline-block" title="Editar empleados" href="#" value="${usuario.ID}" onclick="mostrar_datos_modalEmpleado(${usuario.ID})" data-toggle="modal" data-target="#modalactualizarempleados">
                                         <i class="gd-reload icon-text"></i>
                                     </a>
-                                    <a style="margin-right: 7px; class="link-dark d-inline-block" title="Ver mas informacion" href="#" onclick="mostrar_masinfo_modalEmpleado(${usuario.ID})">
+                                    <a style="margin-right: 7px; class="link-dark d-inline-block" title="Ver mas informacion" href="#"  value="${usuario.ID}" onclick="mostrar_masinfo_modalEmpleado(${usuario.ID})" data-toggle="modal" data-target="#modalvermasinformacionempleados">
                                         <i class="gd-eye icon-text"></i>
                                     </a>
                                     <a  style="margin-right: 7px; class="link-dark d-inline-block" title="Enviar correo" href="#"  value="${usuario.ID}" onclick="obtener_datos_correos(${usuario.ID})">
@@ -57,7 +57,6 @@ function obtener_datos_empleadosver() {
                             </td>
                         </tr>
                     `;
-
                     // Añade la fila generada al tbody
                     $('#tabla_usuarios').append(fila);
                     // console.log("este es index: " +usuario.ID)
@@ -91,7 +90,6 @@ function obtener_datos_empleadosver() {
 $('#btn_agregar_empleados').on('click', function () {
     agregar_empleados();
 });
-
 function agregar_empleados() {
     let nombre_empleado = $('#nombre_empleado').val();
     let correo_empleado = $('#correo_empleado').val();
@@ -289,63 +287,92 @@ function mostrar_datos_modalEmpleado(ID) {
 
 
 
-// este es para implementar la funcionalidad de que se puedan ver los detalles del empleado como el que usuario lo registro y etc..
+
+
+
 function mostrar_masinfo_modalEmpleado(ID) {
-    alert("esto es para ver mas informacion del ID: " + ID);
+    console.log(ID);
+    $.ajax({
+        url: "exe.php",
+        type: "POST",
+        dataType: "JSON",
+        data: {
+            run: 'empleados',
+            action: 'masinformacionempleados_js', // Nueva acción para obtener un solo empleado
+            id_empleado_masinformacion: ID
+        },
+        success: function (data) {
+            // actualizar_empleados(ID);
+            // console.log("data : " + data + "si" + usuario);
+            if (data) {
+                // console.log(data);
+                $('#id_motrarmasinfo_empleados').val(data.ID);
+                $('#fecha_creacion_motrarmasinfo_empleados').val(data.fecha_creacion);
+                $('#Fecha_ingreso_motrarmasinfo_empleados').val(data.Fecha_ingreso);
+                $('#estado_motrarmasinfo_empleados').val(data.estado);
+            } else {
+                alert('Error: No se pudieron obtener los datos del empleado.');
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert('Error al obtener los datos del empleado.');
+        }
+    });
 }
- 
+
+
 // funcion para enviar el id y sacar el correo de ese emppleado
 function obtener_datos_correos(ID) {
     // loading(true); // Puedes mostrar un indicador de carga aquí si lo necesitas
     // if (idsSeleccionados.length > 0) {
-        $.ajax({
-            url: "exe.php", // Archivo que procesará la solicitud
-            type: "POST", // Método de envío
-            dataType: "JSON", // Esperamos respuesta en formato JSON
-            data: {
-                run: 'empleados', // Parámetro 'run'
-                action: 'obtenerempleados_correos', // Parámetro 'action'
-                ids: ID // Enviar los IDs seleccionados
-            },
-            success: function (data) {
-                // loading(false); // Quitar el indicador de carga
-                if (data.error) {
-                    alert('Error: ' + data.error); // Mostrar mensaje de error si existe
+    $.ajax({
+        url: "exe.php", // Archivo que procesará la solicitud
+        type: "POST", // Método de envío
+        dataType: "JSON", // Esperamos respuesta en formato JSON
+        data: {
+            run: 'empleados', // Parámetro 'run'
+            action: 'obtenerempleados_correos', // Parámetro 'action'
+            ids: ID // Enviar los IDs seleccionados
+        },
+        success: function (data) {
+            // loading(false); // Quitar el indicador de carga
+            if (data.error) {
+                alert('Error: ' + data.error); // Mostrar mensaje de error si existe
 
-                } else {
-                    contenedro_correo = data.correo;
-                    contenedro_nombres = data.nombres;
-                    // alert("se envio el correo: " + contenedro_correo);
-                    // console.log(contenedro_correo , contenedro_nombres);
-                    enviar_correo(contenedro_correo,contenedro_nombres);
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                // Manejo de errores
-                if (jqXHR.status === 0) {
-                    alert('No conectado: Verifica la red.');
-                } else if (jqXHR.status == 404) {
-                    alert('Página no encontrada [404].');
-                } else if (jqXHR.status == 500) {
-                    alert('Error interno del servidor [500].');
-                } else if (textStatus === 'parsererror') {
-                    console.log(jqXHR.responseText);
-                    alert('Error al analizar JSON.');
-                } else if (textStatus === 'timeout') {
-                    alert('Error de tiempo de espera.');
-                } else if (textStatus === 'abort') {
-                    alert('Solicitud Ajax abortada.');
-                } else {
-                    console.log('Error no capturado: ' + jqXHR.responseText);
-                }
+            } else {
+                contenedro_correo = data.correo;
+                contenedro_nombres = data.nombres;
+                // alert("se envio el correo: " + contenedro_correo);
+                // console.log(contenedro_correo , contenedro_nombres);
+                enviar_correo(contenedro_correo, contenedro_nombres);
             }
-        });
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            // Manejo de errores
+            if (jqXHR.status === 0) {
+                alert('No conectado: Verifica la red.');
+            } else if (jqXHR.status == 404) {
+                alert('Página no encontrada [404].');
+            } else if (jqXHR.status == 500) {
+                alert('Error interno del servidor [500].');
+            } else if (textStatus === 'parsererror') {
+                console.log(jqXHR.responseText);
+                alert('Error al analizar JSON.');
+            } else if (textStatus === 'timeout') {
+                alert('Error de tiempo de espera.');
+            } else if (textStatus === 'abort') {
+                alert('Solicitud Ajax abortada.');
+            } else {
+                console.log('Error no capturado: ' + jqXHR.responseText);
+            }
+        }
+    });
     // } else {
     //     alert("No has seleccionado ningún empleado.");
     // }
 }
-
-function enviar_correo(contenedro_correo,contenedro_nombres) {
+// funcion que hace envio de los correos segun la documentacion de la libreria
+function enviar_correo(contenedro_correo, contenedro_nombres) {
     // Convertir el array de correos en una cadena separada por comas
     // var toEmails = data.map(function (empleado) {
     //     return empleado.correo; // Asumiendo que data contiene un array de objetos con un campo 'correo'
@@ -355,17 +382,16 @@ function enviar_correo(contenedro_correo,contenedro_nombres) {
     var templateParams = {
         toEmail: contenedro_correo,
         nombre_persona: contenedro_nombres,
-        // cc_email: 'escorciacaballeroe@gmail.com', // Agregar el correo en copia
-        message: 'este es un correo probando desde base de datos en inventario'
+        message: 'Este es un correo probando desde base de datos en inventario',
+        estado: 'aprobado' // O 'rechazado' dependiendo de la lógica
     };
-
-    // Enviar el correo usando EmailJS
+    
     emailjs.send('service_cyxzs99', 'template_ea43mm9', templateParams)
         .then(function (response) {
             alert('Correo enviado con éxito!' + contenedro_correo, response.status, response.text);
         }, function (error) {
             alert('Error al enviar el correo: ' + JSON.stringify(error));
-            console.log(contenedro_correo)
+            console.log(contenedro_correo);
         });
 }
 
@@ -380,27 +406,74 @@ $('#seleccionarTodos').on('click', function () {
     // Verificar si al menos un checkbox está seleccionado
     let seleccionados = $('input[name="id_correo_enviar[]"]:checked').length > 0;
     // se agrega el boton que se quiere apagar
-    $('#btn-enviar-correo').prop('disabled', !seleccionados);
+    $('#btn-actualizar-varios-empleados').prop('disabled', !seleccionados);
 });
 
 // Evento para detectar cambios individuales en los checkboxes
 $(document).on('change', 'input[name="id_correo_enviar[]"]', function () {
     let seleccionados = $('input[name="id_correo_enviar[]"]:checked').length > 0;
     // se agrega el boton que se quiere apagar 
-    $('#btn-enviar-correo').prop('disabled', !seleccionados);
+    $('#btn-actualizar-varios-empleados').prop('disabled', !seleccionados);
 });
 // -----------------------------------------------------------------
 
+
+
+
 // Evento al hacer clic en el botón "Enviar"
-$('#btn-enviar-correo').on('click', function () {
+$('#btn_actualizar_varios_estados_empleados').on('click', function () {
     let idsSeleccionados = $('input[name="id_correo_enviar[]"]:checked').map(function () {
         return $(this).val();
     }).get();
 
     if (idsSeleccionados.length > 0) {
-        // obtener_datos_correos(idsSeleccionados);
-        alert("si tienes ID seleccionados y son: " + idsSeleccionados);
+        actualizar_varios_estados_empleados(idsSeleccionados);
+        // alert("si tienes ID seleccionados y son: " + idsSeleccionados);
     } else {
         alert("No has seleccionado ningún empleado.");
     }
 });
+// funcion para enviar el id y sacar el correo de ese emppleado
+function actualizar_varios_estados_empleados(idsSeleccionados) {
+    let estados_actualizar_empleadosjs = $('#estado_empleado_actualizar_varios').val();
+
+    $.ajax({
+        url: "exe.php", // Archivo que procesará la solicitud
+        type: "POST", // Método de envío
+        dataType: "JSON", // Esperamos respuesta en formato JSON
+        data: {
+            run: 'empleados', // Parámetro 'run'
+            action: 'actulizar_varios_estados_js', // Parámetro 'action'
+            ids_estados: idsSeleccionados, // Enviar los IDs seleccionados
+            estados_actualizar_empleados: estados_actualizar_empleadosjs
+        },
+        success: function (data) {
+            // loading(false); // Quitar el indicador de carga
+            if (data.error) {
+                alert('Error: ' + data.error); // Mostrar mensaje de error si existe
+            } else {
+                obtener_datos_empleadosver();
+                alert(data.success);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            // Manejo de errores
+            if (jqXHR.status === 0) {
+                alert('No conectado: Verifica la red.');
+            } else if (jqXHR.status == 404) {
+                alert('Página no encontrada [404].');
+            } else if (jqXHR.status == 500) {
+                alert('Error interno del servidor [500].');
+            } else if (textStatus === 'parsererror') {
+                console.log(jqXHR.responseText);
+                alert('Error al analizar JSON.');
+            } else if (textStatus === 'timeout') {
+                alert('Error de tiempo de espera.');
+            } else if (textStatus === 'abort') {
+                alert('Solicitud Ajax abortada.');
+            } else {
+                console.log('Error no capturado: ' + jqXHR.responseText);
+            }
+        }
+    });
+}

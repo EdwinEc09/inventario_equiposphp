@@ -16,6 +16,20 @@ class Empleados extends OutSourcing
         }
     }
 
+    // este es para ver mas informacion de los empleados 
+    public function masinformacionempleadosjson($id_empleado_masinformacion)
+    {
+        $conn = $this->dbConnect();
+        if ($conn) {
+            $sql = "SELECT * FROM empleados where ID = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$id_empleado_masinformacion]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return ['error' => 'Error al conectar con la base de datos.'];
+        }
+    }
+
     public function obtenerempleado_unicojson($id_empleado_json)
     {
         $conn = $this->dbConnect();
@@ -189,6 +203,44 @@ class Empleados extends OutSourcing
     //         return ['error' => 'Error al conectar con la base de datos.'];
     //     }
     // }
+   
+   
+
+
+    // este es para que actualize varios empleados en los estados 
+    public function actualizar_varios_estados_empleadosjson($ids_estados, $estado_actualizar_empleados)
+    {
+        $conn = $this->dbConnect();
+        if ($conn) {
+            // Si $ids_estados es un array, convierte cada ID en un entero
+            $ids_estados = array_map('intval', $ids_estados);
+    
+            // Crea un marcador de posición para cada ID
+            $placeholders = implode(',', array_fill(0, count($ids_estados), '?'));
+    
+            // Preparar la consulta SQL para actualizar el estado de varios empleados
+            $sql = "UPDATE empleados SET estado = ? WHERE ID IN ($placeholders)";
+            
+            // Preparar la declaración SQL
+            $stmt = $conn->prepare($sql);
+    
+            // Crear un array para bindParam: primero el estado, seguido de los IDs
+            $params = array_merge([$estado_actualizar_empleados], $ids_estados);
+    
+            // Ejecutar la consulta con los parámetros
+            $result = $stmt->execute($params);
+    
+            // Verificar si se actualizaron filas
+            if ($result) {
+                return ['success' => 'Los estados se han actualizado correctamente.'];
+            } else {
+                return ['error' => 'Error al actualizar los estados.'];
+            }
+        } else {
+            return ['error' => 'Error al conectar con la base de datos.'];
+        }
+    }
+    
 
     //  fin empleados
 }

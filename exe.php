@@ -28,6 +28,13 @@ if (isset($_POST['run']) && isset($_POST['action'])) {
                     // Asegúrate de devolver los datos como JSON
                     echo json_encode($usuarios);
                     break;
+                case 'masinformacionempleados_js':
+                    // Obtener los datos de la base de datos
+                    $usuarios = $EmpleadosOS->masinformacionempleadosjson($_POST['id_empleado_masinformacion']);
+
+                    // Asegúrate de devolver los datos como JSON
+                    echo json_encode($usuarios);
+                    break;
                 // este obtiene un solo empleado para despues hacer la actualizacion
                 case 'obtenerempleado_unico_js':
                     // Obtener los datos de la base de datos
@@ -41,6 +48,13 @@ if (isset($_POST['run']) && isset($_POST['action'])) {
                 case 'obtenerempleados_correos':
                     // Obtener los datos de la base de datos
                     $empleados_correo = $EmpleadosOS->obtenerempleado_correojson($_POST['ids']);
+                
+                    // Asegúrate de devolver los datos como JSON 
+                    echo json_encode($empleados_correo);
+                    break;
+                case 'actulizar_varios_estados_js':
+                    // Obtener los datos de la base de datos
+                    $empleados_correo = $EmpleadosOS->actualizar_varios_estados_empleadosjson($_POST['ids_estados'],$_POST['estados_actualizar_empleados']);
                 
                     // Asegúrate de devolver los datos como JSON 
                     echo json_encode($empleados_correo);
