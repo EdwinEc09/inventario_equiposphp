@@ -49,7 +49,7 @@ function obtener_datos_empleadosver() {
                                     <a style="margin-right: 7px; class="link-dark d-inline-block" title="Ver mas informacion" href="#" onclick="mostrar_masinfo_modalEmpleado(${usuario.ID})">
                                         <i class="gd-eye icon-text"></i>
                                     </a>
-                                    <a  style="margin-right: 7px; class="link-dark d-inline-block" title="Enviar correo" href="#" onclick="mostrar_masinfo_modalEmpleado(${usuario.ID})">
+                                    <a  style="margin-right: 7px; class="link-dark d-inline-block" title="Enviar correo" href="#"  value="${usuario.ID}" onclick="obtener_datos_correos(${usuario.ID})">
                                         <i class="gd-email icon-text"></i>
                                     </a>
                               
@@ -293,45 +293,11 @@ function mostrar_datos_modalEmpleado(ID) {
 function mostrar_masinfo_modalEmpleado(ID) {
     alert("esto es para ver mas informacion del ID: " + ID);
 }
-
-
-
-// Evento para seleccionar o deseleccionar todos los checkboxes ademas de anviar el valor a la db
-$('#seleccionarTodos').on('click', function () {
-    // Obtener el estado actual de todos los checkboxes
-    let todosSeleccionados = $('input[name="id_correo_enviar[]"]').length === $('input[name="id_correo_enviar[]"]:checked').length;
-
-    // Marcar o desmarcar todos los checkboxes
-    $('input[name="id_correo_enviar[]"]').prop('checked', !todosSeleccionados);
-
-    // Verificar si al menos un checkbox está seleccionado
-    let seleccionados = $('input[name="id_correo_enviar[]"]:checked').length > 0;
-    $('#btn-enviar-correo').prop('disabled', !seleccionados);
-});
-
-// Evento para detectar cambios individuales en los checkboxes
-$(document).on('change', 'input[name="id_correo_enviar[]"]', function () {
-    let seleccionados = $('input[name="id_correo_enviar[]"]:checked').length > 0;
-    $('#btn-enviar-correo').prop('disabled', !seleccionados);
-});
-
-// Evento al hacer clic en el botón "Enviar"
-$('#btn-enviar-correo').on('click', function () {
-    let idsSeleccionados = $('input[name="id_correo_enviar[]"]:checked').map(function () {
-        return $(this).val();
-    }).get();
-
-    if (idsSeleccionados.length > 0) {
-        obtener_datos_correos(idsSeleccionados);
-        // alert("si tienes ID seleccionados y son: " + idsSeleccionados);
-    } else {
-        alert("No has seleccionado ningún empleado.");
-    }
-});
-
-function obtener_datos_correos(idsSeleccionados) {
+ 
+// funcion para enviar el id y sacar el correo de ese emppleado
+function obtener_datos_correos(ID) {
     // loading(true); // Puedes mostrar un indicador de carga aquí si lo necesitas
-    if (idsSeleccionados.length > 0) {
+    // if (idsSeleccionados.length > 0) {
         $.ajax({
             url: "exe.php", // Archivo que procesará la solicitud
             type: "POST", // Método de envío
@@ -339,7 +305,7 @@ function obtener_datos_correos(idsSeleccionados) {
             data: {
                 run: 'empleados', // Parámetro 'run'
                 action: 'obtenerempleados_correos', // Parámetro 'action'
-                ids: idsSeleccionados // Enviar los IDs seleccionados
+                ids: ID // Enviar los IDs seleccionados
             },
             success: function (data) {
                 // loading(false); // Quitar el indicador de carga
@@ -347,13 +313,12 @@ function obtener_datos_correos(idsSeleccionados) {
                     alert('Error: ' + data.error); // Mostrar mensaje de error si existe
 
                 } else {
-                    // contenedro_correo = data;
+                    contenedro_correo = data.correo;
+                    contenedro_nombres = data.nombres;
                     // alert("se envio el correo: " + contenedro_correo);
-                    // console.log(data);
-                    enviar_correo(data);
+                    // console.log(contenedro_correo , contenedro_nombres);
+                    enviar_correo(contenedro_correo,contenedro_nombres);
                 }
-
-
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 // Manejo de errores
@@ -375,27 +340,21 @@ function obtener_datos_correos(idsSeleccionados) {
                 }
             }
         });
-    } else {
-        alert("No has seleccionado ningún empleado.");
-    }
+    // } else {
+    //     alert("No has seleccionado ningún empleado.");
+    // }
 }
 
-
-function enviar_correo(data) {
-    // Obtener los correos del formulario
-    // var toEmail = document.getElementById('toEmail').value;
-    // var ccEmail = document.getElementById('ccEmail').value; // Este es opcional
-    // var from_Message = document.getElementById('from_message').value; // Este es opcional
-
+function enviar_correo(contenedro_correo,contenedro_nombres) {
     // Convertir el array de correos en una cadena separada por comas
-    var toEmails = data.map(function (empleado) {
-        return empleado.correo; // Asumiendo que data contiene un array de objetos con un campo 'correo'
-    }).join(',');
+    // var toEmails = data.map(function (empleado) {
+    //     return empleado.correo; // Asumiendo que data contiene un array de objetos con un campo 'correo'
+    // }).join(',');
 
     // console.log(toEmails);
     var templateParams = {
-        toEmail: toEmails,
-        nombre_persona: 'Mega',
+        toEmail: contenedro_correo,
+        nombre_persona: contenedro_nombres,
         // cc_email: 'escorciacaballeroe@gmail.com', // Agregar el correo en copia
         message: 'este es un correo probando desde base de datos en inventario'
     };
@@ -403,9 +362,45 @@ function enviar_correo(data) {
     // Enviar el correo usando EmailJS
     emailjs.send('service_cyxzs99', 'template_ea43mm9', templateParams)
         .then(function (response) {
-            alert('Correo enviado con éxito!' + toEmails, response.status, response.text);
+            alert('Correo enviado con éxito!' + contenedro_correo, response.status, response.text);
         }, function (error) {
             alert('Error al enviar el correo: ' + JSON.stringify(error));
+            console.log(contenedro_correo)
         });
 }
 
+
+// -----------------------------------------------------------------
+// Evento para seleccionar o deseleccionar todos los checkboxes ademas de anviar el valor a la db
+$('#seleccionarTodos').on('click', function () {
+    // Obtener el estado actual de todos los checkboxes
+    let todosSeleccionados = $('input[name="id_correo_enviar[]"]').length === $('input[name="id_correo_enviar[]"]:checked').length;
+    // Marcar o desmarcar todos los checkboxes
+    $('input[name="id_correo_enviar[]"]').prop('checked', !todosSeleccionados);
+    // Verificar si al menos un checkbox está seleccionado
+    let seleccionados = $('input[name="id_correo_enviar[]"]:checked').length > 0;
+    // se agrega el boton que se quiere apagar
+    $('#btn-enviar-correo').prop('disabled', !seleccionados);
+});
+
+// Evento para detectar cambios individuales en los checkboxes
+$(document).on('change', 'input[name="id_correo_enviar[]"]', function () {
+    let seleccionados = $('input[name="id_correo_enviar[]"]:checked').length > 0;
+    // se agrega el boton que se quiere apagar 
+    $('#btn-enviar-correo').prop('disabled', !seleccionados);
+});
+// -----------------------------------------------------------------
+
+// Evento al hacer clic en el botón "Enviar"
+$('#btn-enviar-correo').on('click', function () {
+    let idsSeleccionados = $('input[name="id_correo_enviar[]"]:checked').map(function () {
+        return $(this).val();
+    }).get();
+
+    if (idsSeleccionados.length > 0) {
+        // obtener_datos_correos(idsSeleccionados);
+        alert("si tienes ID seleccionados y son: " + idsSeleccionados);
+    } else {
+        alert("No has seleccionado ningún empleado.");
+    }
+});

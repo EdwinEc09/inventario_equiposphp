@@ -42,7 +42,7 @@ if (isset($_POST['run']) && isset($_POST['action'])) {
                     // Obtener los datos de la base de datos
                     $empleados_correo = $EmpleadosOS->obtenerempleado_correojson($_POST['ids']);
                 
-                    // Asegúrate de devolver los datos como JSON
+                    // Asegúrate de devolver los datos como JSON 
                     echo json_encode($empleados_correo);
                     break;
                 

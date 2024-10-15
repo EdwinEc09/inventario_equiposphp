@@ -140,37 +140,55 @@ class Empleados extends OutSourcing
         }
     }
 
-// este es obtener los datos por medio de un parametro, en este casi el Id
     public function obtenerempleado_correojson($ids)
     {
         $conn = $this->dbConnect();
         if ($conn) {
-            // Si $ids es un array, convierte cada ID en un entero
-            $ids = array_map('intval', $ids);
-
-            // Crea un marcador de posición para cada ID
-            $placeholders = implode(',', array_fill(0, count($ids), '?'));
-
-            // Preparar la consulta SQL para obtener varios correos con IN
-            $sql = "SELECT correo FROM empleados WHERE ID IN ($placeholders)";
+            $sql = "SELECT nombres,correo FROM empleados WHERE ID = ?";
             $stmt = $conn->prepare($sql);
-
-            // Ejecutar la consulta con los IDs
-            $stmt->execute($ids);
-
-            // Obtener todos los registros con fetchAll
-            $correos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            // Verificar si se encontraron empleados
-            if ($correos) {
-                return $correos;
+            $stmt->execute([$ids]);
+            $empleado = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($empleado) {
+                return $empleado;
             } else {
-                return ['error' => 'Correos no encontrados.'];
+                return ['error' => 'Empleado no encontrado.'];
             }
         } else {
             return ['error' => 'Error al conectar con la base de datos.'];
         }
     }
+
+    // este es obtener los datos por medio de un parametro, en este casi el Id
+    // public function obtenerempleado_correojson($ids)
+    // {
+    //     $conn = $this->dbConnect();
+    //     if ($conn) {
+    //         // Si $ids es un array, convierte cada ID en un entero
+    //         $ids = array_map('intval', $ids);
+
+    //         // Crea un marcador de posición para cada ID
+    //         $placeholders = implode(',', array_fill(0, count($ids), '?'));
+
+    //         // Preparar la consulta SQL para obtener varios correos con IN
+    //         $sql = "SELECT correo FROM empleados WHERE ID IN ($placeholders)";
+    //         $stmt = $conn->prepare($sql);
+
+    //         // Ejecutar la consulta con los IDs
+    //         $stmt->execute($ids);
+
+    //         // Obtener todos los registros con fetchAll
+    //         $correos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    //         // Verificar si se encontraron empleados
+    //         if ($correos) {
+    //             return $correos;
+    //         } else {
+    //             return ['error' => 'Correos no encontrados.'];
+    //         }
+    //     } else {
+    //         return ['error' => 'Error al conectar con la base de datos.'];
+    //     }
+    // }
 
     //  fin empleados
 }
