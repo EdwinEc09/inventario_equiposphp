@@ -286,10 +286,7 @@ function mostrar_datos_modalEmpleado(ID) {
 }
 
 
-
-
-
-
+// funcion que muestra mas informacion de los clientes 
 function mostrar_masinfo_modalEmpleado(ID) {
     console.log(ID);
     $.ajax({
@@ -334,6 +331,7 @@ function obtener_datos_correos(ID) {
             action: 'obtenerempleados_correos', // Parámetro 'action'
             ids: ID // Enviar los IDs seleccionados
         },
+        // respuesta correcta 
         success: function (data) {
             // loading(false); // Quitar el indicador de carga
             if (data.error) {
@@ -385,7 +383,7 @@ function enviar_correo(contenedro_correo, contenedro_nombres) {
         message: 'Este es un correo probando desde base de datos en inventario',
         estado: 'aprobado' // O 'rechazado' dependiendo de la lógica
     };
-    
+    // aqui se manda los parametross a la libreria para que se envien los correos 
     emailjs.send('service_cyxzs99', 'template_ea43mm9', templateParams)
         .then(function (response) {
             alert('Correo enviado con éxito!' + contenedro_correo, response.status, response.text);
@@ -394,7 +392,6 @@ function enviar_correo(contenedro_correo, contenedro_nombres) {
             console.log(contenedro_correo);
         });
 }
-
 
 // -----------------------------------------------------------------
 // Evento para seleccionar o deseleccionar todos los checkboxes ademas de anviar el valor a la db
@@ -437,43 +434,48 @@ $('#btn_actualizar_varios_estados_empleados').on('click', function () {
 function actualizar_varios_estados_empleados(idsSeleccionados) {
     let estados_actualizar_empleadosjs = $('#estado_empleado_actualizar_varios').val();
 
-    $.ajax({
-        url: "exe.php", // Archivo que procesará la solicitud
-        type: "POST", // Método de envío
-        dataType: "JSON", // Esperamos respuesta en formato JSON
-        data: {
-            run: 'empleados', // Parámetro 'run'
-            action: 'actulizar_varios_estados_js', // Parámetro 'action'
-            ids_estados: idsSeleccionados, // Enviar los IDs seleccionados
-            estados_actualizar_empleados: estados_actualizar_empleadosjs
-        },
-        success: function (data) {
-            // loading(false); // Quitar el indicador de carga
-            if (data.error) {
-                alert('Error: ' + data.error); // Mostrar mensaje de error si existe
-            } else {
-                obtener_datos_empleadosver();
-                alert(data.success);
+    if (estados_actualizar_empleadosjs === "") {
+        alert("El estado no puede ir vacio");
+
+    } else {
+        $.ajax({
+            url: "exe.php", // Archivo que procesará la solicitud
+            type: "POST", // Método de envío
+            dataType: "JSON", // Esperamos respuesta en formato JSON
+            data: {
+                run: 'empleados', // Parámetro 'run'
+                action: 'actulizar_varios_estados_js', // Parámetro 'action'
+                ids_estados: idsSeleccionados, // Enviar los IDs seleccionados
+                estados_actualizar_empleados: estados_actualizar_empleadosjs
+            },
+            success: function (data) {
+                // loading(false); // Quitar el indicador de carga
+                if (data.error) {
+                    alert('Error: ' + data.error); // Mostrar mensaje de error si existe
+                } else {
+                    obtener_datos_empleadosver();
+                    alert(data.success);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                // Manejo de errores
+                if (jqXHR.status === 0) {
+                    alert('No conectado: Verifica la red.');
+                } else if (jqXHR.status == 404) {
+                    alert('Página no encontrada [404].');
+                } else if (jqXHR.status == 500) {
+                    alert('Error interno del servidor [500].');
+                } else if (textStatus === 'parsererror') {
+                    console.log(jqXHR.responseText);
+                    alert('Error al analizar JSON.');
+                } else if (textStatus === 'timeout') {
+                    alert('Error de tiempo de espera.');
+                } else if (textStatus === 'abort') {
+                    alert('Solicitud Ajax abortada.');
+                } else {
+                    console.log('Error no capturado: ' + jqXHR.responseText);
+                }
             }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            // Manejo de errores
-            if (jqXHR.status === 0) {
-                alert('No conectado: Verifica la red.');
-            } else if (jqXHR.status == 404) {
-                alert('Página no encontrada [404].');
-            } else if (jqXHR.status == 500) {
-                alert('Error interno del servidor [500].');
-            } else if (textStatus === 'parsererror') {
-                console.log(jqXHR.responseText);
-                alert('Error al analizar JSON.');
-            } else if (textStatus === 'timeout') {
-                alert('Error de tiempo de espera.');
-            } else if (textStatus === 'abort') {
-                alert('Solicitud Ajax abortada.');
-            } else {
-                console.log('Error no capturado: ' + jqXHR.responseText);
-            }
-        }
-    });
+        });
+    }
 }
