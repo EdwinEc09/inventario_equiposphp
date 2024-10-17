@@ -23,10 +23,29 @@ function obtener_datos_equipos() {
 
                 // Itera sobre los datos recibidos y genera las filas de la tabla
                 $.each(data, function (index, equiposver) {
-                    // esto es por si el esta activo o inactivo , 1 es activo y 0 es inactivo
-                    var estadoBadge = equiposver.estado == '1'
-                        ? '<span class="badge badge-pill badge-success">Activo</span>'
-                        : '<span class="badge badge-pill badge-danger">Inactivo</span>';
+                    // // pasar el estado a un string
+                    // var estadoLimpio = equiposver.estado.trim();
+                    // var estadoBadge;
+                    // switch (estadoLimpio) {
+                    //     case 'Asignado':
+                    //         estadoBadge = '<span class="badge badge-pill badge-success">Asignado</span>';
+                    //         break;
+                    //     case 'Disponible':
+                    //         estadoBadge = '<span class="badge badge-pill badge-info">Disponible</span>';
+                    //         break;
+                    //     case 'Averiado':
+                    //         estadoBadge = '<span class="badge badge-pill badge-danger">Averiado</span>';
+                    //         break;
+                    //     case 'Robado':
+                    //         estadoBadge = '<span class="badge badge-pill badge-warning">Robado</span>';
+                    //         break;
+                    //     case 'Otrosss':
+                    //         estadoBadge = '<span class="badge badge-pill badge-secondary">Otros</span>';
+                    //         break;
+                    //     default:
+                    //         estadoBadge = '<span class="badge badge-pill badge-dark">Desconocido</span>';
+                    //         break;
+                    // }
 
                     var fila = `
                         <tr>
@@ -108,7 +127,7 @@ function agregar_equipos() {
     let estado_equipo = $('#estado_equipo').val();
     let observacion_equipo = $('#observacion_equipo').val();
 
-    if (tipo_equipo === "" || estado_equipo==="") {
+    if (tipo_equipo === "" || estado_equipo === "") {
         alert("Los campos obligatorios no deben ir vaios");
         return;
     }
@@ -135,7 +154,7 @@ function agregar_equipos() {
 
             // alert("se guardó");
             if (response.success) {
-                obtener_datos_equipos(); 
+                obtener_datos_equipos();
                 // alert(response.success);
                 // Alerta de éxito
                 var alerta_agregar_equipos = `
@@ -246,7 +265,7 @@ function actualizar_equipos() {
         },
         success: function (response) {
             if (response.success) {
-                obtener_datos_equipos(); 
+                obtener_datos_equipos();
                 alert(response.success);
 
             } else {
