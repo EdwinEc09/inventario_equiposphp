@@ -7,7 +7,8 @@ class Equipos extends OutSourcing
     {
         $conn = $this->dbConnect();
         if ($conn) {
-            $sql = "SELECT * FROM equipos";
+            // $sql = "SELECT * FROM equipos";
+            $sql = "SELECT e.ID, e.tipo, e.marca, e.serial, e.direccion_mac_wifi, e.direccion_mac_ethenet, e.imei1, e.imei2, e.fecha_creacion, ee.estado,ee.color_estado, e.observacion FROM equipos e JOIN estado_equipos ee ON e.estado = ee.estado;";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -184,7 +185,7 @@ class Equipos extends OutSourcing
     }
 
     // este es para que me devuelva todos los datos de una tabla
-    public function agregar_estadosequipos_json($estados_equipos_tiposequipos_json)
+    public function agregar_estadosequipos_json($estados_equipos_tiposequipos_json,$colorestado_equipos_tiposequipos_json)
     {
         $conn = $this->dbConnect();
 
@@ -194,11 +195,11 @@ class Equipos extends OutSourcing
             $fecha_creacion_json = date("Y-m-d h:i:s A");
 
             // Consulta para insertar un nuevo empleado
-            $sql = "INSERT INTO estado_equipos (estado) VALUES (?)";
+            $sql = "INSERT INTO estado_equipos (estado,color_estado) VALUES (?,?)";
             $stmt = $conn->prepare($sql);
 
             // Ejecutar la consulta con los valores proporcionados
-            $stmt->execute([$estados_equipos_tiposequipos_json]);
+            $stmt->execute([$estados_equipos_tiposequipos_json,$colorestado_equipos_tiposequipos_json]);
             // Si la inserción fue exitosa, devolver true o algún mensaje
             if ($stmt->rowCount() > 0) {
                 return ['success' => 'estado equipo agregado exitosamente.'];

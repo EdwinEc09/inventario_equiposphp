@@ -46,7 +46,7 @@ function obtener_datos_equipos() {
                     //         estadoBadge = '<span class="badge badge-pill badge-dark">Desconocido</span>';
                     //         break;
                     // }
-
+                    let color = equiposver.color_estado;
                     var fila = `
                         <tr>
                             <td class="py-3">${index + 1}</td>
@@ -58,7 +58,7 @@ function obtener_datos_equipos() {
                             <td class="py-3">${equiposver.imei1}</td>
                             <td class="py-3">${equiposver.imei2}</td>
                             <td class="py-3">${equiposver.fecha_creacion}</td>
-                             <td class="py-3">${equiposver.estado}</td>
+                            <td class="py-3"><span class="badge badge-pill badge-success" style="color: #fff; background-color: ${color};">${equiposver.estado}</span></td>
                             <td class="py-3">
                                 <div class="position-relative">
                                     <a style="margin-right: 7px;" class="link-dark d-inline-block" href="#" value="${equiposver.ID}" onclick="mostrar_datos_modalEquipos(${equiposver.ID})" title="Editar Equipos" data-toggle="modal" data-target="#modalactualizarequipos" >

@@ -75,6 +75,7 @@ DROP TABLE estado_equipos;
 create table estado_equipos (
 	ID int identity (1,1) primary key,
 	estado char(50) null,
+	color_estado char(100) null
 );
 
 select * from estado_equipos;

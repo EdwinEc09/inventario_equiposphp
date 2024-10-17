@@ -168,9 +168,10 @@ if (isset($_POST['run']) && isset($_POST['action'])) {
                     echo json_encode($pasar_tiposequipos_a_json);
                     break;
                 // agregar tipos de equipos
-                case 'agregar_estadosequipos':
+                case 'agregar_estadosequipos_js':
                     $pasar_estadosequipos_a_json = $EquiposOS->agregar_estadosequipos_json(
-                        $_POST['estados_equipos_tiposequipos_json']
+                        $_POST['estados_equipos_tiposequipos_json'],
+                        $_POST['colorestado_equipos_tiposequipos_json']
 
                     );
                     echo json_encode($pasar_estadosequipos_a_json);

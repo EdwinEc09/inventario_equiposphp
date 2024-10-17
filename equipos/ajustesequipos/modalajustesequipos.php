@@ -66,6 +66,10 @@
                             <label for="email">Serial</label>
                             <input type="Text" class="form-control" value="" id="email" name="email" placeholder="Serial">
                         </div> -->
+                        <div class="form-group col-12 col-md-12">
+                            <label for="colorestado_equipos_tiposequipos">Seleccionar Color</label>
+                            <input type="color" class="form-control" id="colorestado_equipos_tiposequipos" name="colorestado_equipos_tiposequipos">
+                        </div>
                     </div>
                 </div>
                 <!-- End Form -->

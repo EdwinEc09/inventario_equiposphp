@@ -30,6 +30,7 @@
                 <tr>
                     <th class="font-weight-semi-bold border-top-0 py-3">#</th>
                     <th class="font-weight-semi-bold border-top-0 py-3">Estado</th>
+                    <th class="font-weight-semi-bold border-top-0 py-3">Color Asignado</th>
                     <th class="font-weight-semi-bold border-top-0 py-3">acciones</th>
                 </tr>
             </thead>
