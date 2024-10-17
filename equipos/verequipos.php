@@ -15,7 +15,7 @@
             </nav>
             <!-- End Breadcrumb -->
       
-            <button id="obtener_datos_equiposbtn" type="submit" class="btn btn-primary float-right">Buscar</button>
+            <button id="btn_actualizar_varios_estadosequipos" type="submit" class="btn btn-primary float-right">Cambiar estado</button>
             <!--  -->
             <div class="mb-3 mb-md-4 d-flex justify-content-between">
                 <div class="h3 mb-0">Equipos</div>

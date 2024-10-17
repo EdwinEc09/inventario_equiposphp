@@ -42,10 +42,10 @@ function obtener_datos_equipos() {
                              <td class="py-3">${equiposver.estado}</td>
                             <td class="py-3">
                                 <div class="position-relative">
-                                    <a class="link-dark d-inline-block" href="#" value="${equiposver.ID}" onclick="mostrar_datos_modalEquipos(${equiposver.ID})" title="Editar Equipos" data-toggle="modal" data-target="#modalactualizarequipos" >
+                                    <a style="margin-right: 7px;" class="link-dark d-inline-block" href="#" value="${equiposver.ID}" onclick="mostrar_datos_modalEquipos(${equiposver.ID})" title="Editar Equipos" data-toggle="modal" data-target="#modalactualizarequipos" >
                                         <i class="gd-reload icon-text"></i>
                                     </a>
-                                    <a class="link-dark d-inline-block" href="#" title="Ver mas Informacion" onclick="mostrar_masinfo_modalEquipos(${equiposver.ID})">
+                                    <a style="margin-right: 7px;" class="link-dark d-inline-block" href="#" title="Ver mas Informacion" onclick="mostrar_masinfo_modalEquipos(${equiposver.ID})">
                                         <i class="gd-eye icon-text"></i>
                                     </a>
                               

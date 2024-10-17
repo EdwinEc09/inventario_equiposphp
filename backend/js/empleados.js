@@ -252,7 +252,7 @@ function actualizar_empleados() {
 
 // esta funcion hace que se muestre los datos del empleado antes de actualizarlos
 function mostrar_datos_modalEmpleado(ID) {
-    console.log(ID);
+
     $.ajax({
         url: "exe.php",
         type: "POST",
@@ -288,7 +288,6 @@ function mostrar_datos_modalEmpleado(ID) {
 
 // funcion que muestra mas informacion de los clientes 
 function mostrar_masinfo_modalEmpleado(ID) {
-    console.log(ID);
     $.ajax({
         url: "exe.php",
         type: "POST",
