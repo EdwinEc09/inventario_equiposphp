@@ -100,7 +100,7 @@
                                 echo '<option value="">Seleccionar</option>';
                                 // Itera sobre los resultados y genera las opciones
                                 foreach ($estados_equipos as $row) {
-                                    echo '<option value="' . $row->estado . '">' . $row->estado . '</option>';
+                                    echo '<option value="' . $row->ID . '">' . $row->estado . '</option>';
                                 }
                             } else {
                                 echo '<option value="">No hay estados disponibles</option>';

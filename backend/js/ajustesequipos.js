@@ -79,7 +79,7 @@ $('#btn_agregar_tiposequipos').on('click', function () {
 });
 function agregar_tipoequipos() {
     let tipos_equipos_tiposequipos = $('#tipos_equipos_tiposequipos').val();
-    if (tipos_equipos_tiposequipos === "" ) {
+    if (tipos_equipos_tiposequipos === "") {
         alert("Los campos obligatorios no deben ir vaios");
         return;
     }
@@ -96,7 +96,7 @@ function agregar_tipoequipos() {
         success: function (response, data) {
             // alert("se guardó");
             if (response.success) {
-                obtener_datos_equipos(); 
+                obtener_datos_equipos();
                 // alert(response.success);
                 // Alerta de éxito
                 var alerta_agregar_asignacion = `
@@ -162,7 +162,7 @@ function obtener_datos_estadosequipos() {
         },
         success: function (data) {
             if (data.error) {
-                alert('Error: ' + data.error); 
+                alert('Error: ' + data.error);
             } else {
                 obtener_datos_tipoequipos()
                 // Limpia el contenido actual del tbody
@@ -171,7 +171,7 @@ function obtener_datos_estadosequipos() {
                 // Itera sobre los datos recibidos y genera las filas de la tabla
                 $.each(data, function (index, estadosequiposver) {
                     let color = estadosequiposver.color_estado;
-            
+
                     var fila = `
                         <tr>
                             <td class="py-3">${index + 1}</td>
@@ -179,9 +179,12 @@ function obtener_datos_estadosequipos() {
                             <td class="align-middle py-3"><span class="badge badge-pill badge-success" style="color: #fff; background-color: ${color};">${estadosequiposver.estado}</span></td>
                      
                             <td class="py-3">
-                                <div class="position-relative">
-                                    <a class="link-dark d-inline-block" href="#">
-                                        <i class="gd-pencil icon-text"></i>
+                                  <div class="position-relative">
+                                    <a style="margin-right: 7px;" class="link-dark d-inline-block" href="#" value="${estadosequiposver.ID}" onclick="mostrar_datos_modalactualizarestadosequipos(${estadosequiposver.ID})" title="Editar Equipos" data-toggle="modal" data-target="#modalactualizarestadosequipos" >
+                                        <i class="gd-reload icon-text"></i>
+                                    </a>
+                                    <a style="margin-right: 7px;" class="link-dark d-inline-block" href="#" title="Ver mas Informacion" onclick="mostrar_masinfo_modalEquipos(${estadosequiposver.ID})">
+                                        <i class="gd-eye icon-text"></i>
                                     </a>
                               
                                 </div>
@@ -222,13 +225,13 @@ $('#btn_agregar_estadosequipos').on('click', function () {
     agregar_estadosequipos();
 });
 function agregar_estadosequipos() {
-    let estados_equipos_tiposequipos = $('#estados_equipos_tiposequipos').val();
-    let colorestado_equipos_tiposequipos = $('#colorestado_equipos_tiposequipos').val();
-    if (estados_equipos_tiposequipos === "" ) {
+    let agregar_estados_estadoequipos = $('#agregar_estados_estadoequipos').val();
+    let agregar_colorestado_estadoequipos = $('#agregar_colorestado_estadoequipos').val();
+    if (agregar_estados_estadoequipos === "") {
         alert("Los campos obligatorios no deben ir vaios");
         return;
     }
-    console.log(colorestado_equipos_tiposequipos);
+    console.log(agregar_colorestado_estadoequipos);
     // loading(true); // Puedes mostrar un indicador de carga aquí si lo necesitas
     $.ajax({
         url: "exe.php", // Archivo que procesará la solicitud
@@ -237,16 +240,16 @@ function agregar_estadosequipos() {
         data: {
             run: 'equipos', // Parámetro 'run'
             action: 'agregar_estadosequipos_js', // Parámetro 'action'
-            estados_equipos_tiposequipos_json: estados_equipos_tiposequipos, // Parámetro 'empleado_asignacion'
-            colorestado_equipos_tiposequipos_json: colorestado_equipos_tiposequipos, // Parámetro 'empleado_asignacion'
+            agregar_estados_estadoequipos_json: agregar_estados_estadoequipos, // Parámetro 'empleado_asignacion'
+            agregar_colorestado_estadoequipos_json: agregar_colorestado_estadoequipos, // Parámetro 'empleado_asignacion'
 
         },
         success: function (response, data) {
-
             // alert("se guardó");
             if (response.success) {
-                obtener_datos_estadosequipos(); 
-                $('#estados_equipos_tiposequipos').val("");
+                obtener_datos_estadosequipos();
+                $('#agregar_estados_estadoequipos').val("");
+                $('#agregar_colorestado_estadoequipos').val("");
             } else {
                 alert(response.error);
             }
@@ -271,4 +274,98 @@ function agregar_estadosequipos() {
             }
         }
     });
+}
+
+
+
+// esta funcion hace que se muestre los datos del empleado antes de actualizarlos
+function mostrar_datos_modalactualizarestadosequipos(ID) {
+    // console.log(ID);
+    $.ajax({
+        url: "exe.php",
+        type: "POST",
+        dataType: "JSON",
+        data: {
+            run: 'equipos',
+            action: 'obtener_estadoequipo_unico_js', // Nueva acción para obtener un solo empleado
+            id_estadoequipo_json: ID
+        },
+        success: function (data) {
+            // actualizar_empleados(ID);
+            // console.log("data : " + data + "si" + usuario);
+            if (data) {
+                // console.log(data);
+                var mostrar_color = data.color_estado.trim();   //convierte el dato en string(texto)
+                var data_estado = data.estado.trim();   //convierte el dato en string(texto)
+                $('#actualizar_ID_estadoequipos').val(data.ID);
+                $('#actualizar_estados_estadoequipos').val(data_estado);
+                $('#actualizar_colorestado_estadoequipos').val(mostrar_color);
+                // console.log(data.color_estado);
+            } else {
+                alert('Error: No se pudieron obtener los datos del equipo.');
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert('Error al obtener los datos del empleado.');
+        }
+    });
+}
+
+
+// funciones que actualiza el estad del equipo dependiendo el ID 
+$('#btn_actuualizar_estadosequipos').on('click', function () {
+    actualizar_estadosequipos();
+});
+function actualizar_estadosequipos() {
+    let actualizar_ID_estadoequipos = $('#actualizar_ID_estadoequipos').val().trim();
+    let actualizar_estados_estadoequipos = $('#actualizar_estados_estadoequipos').val().trim();
+    let actualizar_colorestado_estadoequipos = $('#actualizar_colorestado_estadoequipos').val().trim();
+    // console.log(actualizar_estados_estadoequipos,actualizar_colorestado_estadoequipos);
+    if (actualizar_estados_estadoequipos === "" || actualizar_colorestado_estadoequipos === "") {
+        alert("los campos no pueden ir vaciios")
+    } else {
+        $.ajax({
+            url: "exe.php",
+            type: "POST", 
+            dataType: "JSON",
+            data: {
+                run: 'equipos',
+                action: 'actualizar_estadosequipos_js', // Nueva acción para obtener un solo empleado
+                actualizar_ID_estadoequipos_json: actualizar_ID_estadoequipos,
+                actualizar_estados_estadoequipos_json: actualizar_estados_estadoequipos,
+                actualizar_colorestado_estadoequipos_json: actualizar_colorestado_estadoequipos
+            },
+            success: function (response) {
+                if (response.success) {
+                    // $('#actualizar_ID_estadoequipos').val("");
+                    // $('#actualizar_estados_estadoequipos').val("");
+                    // $('#actualizar_colorestado_estadoequipos').val("");
+                    alert(response.success);
+                    obtener_datos_estadosequipos();
+                }
+                else {
+                    alert(response.error);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                // Manejo de errores
+                if (jqXHR.status === 0) {
+                    alert('No conectado: Verifica la red.');
+                } else if (jqXHR.status == 404) {
+                    alert('Página no encontrada [404].');
+                } else if (jqXHR.status == 500) {
+                    alert('Error interno del servidor [500].');
+                } else if (textStatus === 'parsererror') {
+                    console.log(jqXHR.responseText);
+                    alert('Error al analizar JSON.');
+                } else if (textStatus === 'timeout') {
+                    alert('Error de tiempo de espera.');
+                } else if (textStatus === 'abort') {
+                    alert('Solicitud Ajax abortada.');
+                } else {
+                    console.log('Error no capturado: ' + jqXHR.responseText);
+                }
+            }
+        });
+    }
 }

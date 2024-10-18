@@ -21,7 +21,7 @@
                             <input type="text" class="form-control" value id="tipos_equipos_tiposequipos"
                                 name="tipos_equipos_tiposequipos" placeholder="Tipo de equipo">
                         </div>
-                        <!-- 
+                        <!--
                         <div class="form-group col-12 col-md-6">
                             <label for="email">Serial</label>
                             <input type="Text" class="form-control" value="" id="email" name="email" placeholder="Serial">
@@ -41,8 +41,11 @@
 </div>
 <!-- End Modal -->
 
+
+<!-- estados de equipos ---------------------------------------------------------------------------- -->
+
 <!-- Modal agregar  estado de equipos -->
-<div id="modalestadosequipos" class="modal fade" role="dialog" aria-labelledby="modalestadosequipos" aria-hidden="true">
+<div id="modalagregarestadosequipos" class="modal fade" role="dialog" aria-labelledby="modalagregarestadosequipos" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -57,18 +60,18 @@
                 <div>
                     <div class="form-row">
                         <div class="form-group col-12 col-md-12">
-                            <label for="estados_equipos_tiposequipos">Estados</label>
-                            <input type="text" class="form-control" value id="estados_equipos_tiposequipos"
-                                name="estados_equipos_tiposequipos" placeholder="Estados de equipo">
+                            <label for="agregar_estados_estadoequipos">Estados</label>
+                            <input type="text" class="form-control" value id="agregar_estados_estadoequipos"
+                                name="agregar_estados_estadoequipos" placeholder="Estados de equipo">
                         </div>
-                        <!-- 
+                        <!--
                         <div class="form-group col-12 col-md-6">
                             <label for="email">Serial</label>
                             <input type="Text" class="form-control" value="" id="email" name="email" placeholder="Serial">
                         </div> -->
                         <div class="form-group col-12 col-md-12">
-                            <label for="colorestado_equipos_tiposequipos">Seleccionar Color</label>
-                            <input type="color" class="form-control" id="colorestado_equipos_tiposequipos" name="colorestado_equipos_tiposequipos">
+                            <label for="agregar_colorestado_estadoequipos">Seleccionar Color</label>
+                            <input type="color" class="form-control" id="agregar_colorestado_estadoequipos" name="agregar_colorestado_estadoequipos">
                         </div>
                     </div>
                 </div>
@@ -83,6 +86,57 @@
 </div>
 <!-- End Modal -->
 
+
+<!-- Modal actualizar  estado de equipos -->
+<div id="modalactualizarestadosequipos" class="modal fade" role="dialog" aria-labelledby="modalactualizarestadosequipos" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Actualizar estados de
+                    equipos </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Form -->
+                <div>
+                    <div class="form-row">
+                    <div class="form-group col-6 col-md-12">
+                        <label for="actualizar_ID_estadoequipos">ID del estado</label>
+                        <div class="input-group">
+                            <input type="text"
+                                class="form-control form-control-onfocus-inherit bg-transparent small text-muted"
+                                id="actualizar_ID_estadoequipos"
+                                readonly>
+                        </div>
+                    </div>
+                        <div class="form-group col-12 col-md-12">
+                            <label for="actualizar_estados_estadoequipos">Estados</label>
+                            <input type="text" class="form-control" value id="actualizar_estados_estadoequipos"
+                                name="actualizar_estados_estadoequipos" placeholder="Estados de equipo">
+                        </div>
+                        <!-- campo colores  -->
+                        <div class="form-group col-12 col-md-12">
+                            <label for="actualizar_colorestado_estadoequipos">Seleccionar Color</label>
+                            <input type="color" class="form-control" id="actualizar_colorestado_estadoequipos" name="actualizar_colorestado_estadoequipos">
+                        </div>
+                    </div>
+                </div>
+                <!-- End Form -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btn_actuualizar_estadosequipos" class="btn btn-primary">Actualizar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
+
+
+
+<!-- equopos ---------------------------------------- -->
 <!-- Modal actualizar equipos verequipos.php -->
 <div id="modalactualizarequipos" class="modal fade" role="dialog" aria-labelledby="modalactualizarequipos"
     aria-hidden="true">
@@ -112,18 +166,18 @@
 
                             <select id="tipo_equipo_actualizar" name="tipo_equipo_actualizar" class="form-control">
                                 <?php
-                                    // Llamamos a la función para obtener los estados
-                                    $tipos_equipos = $EquiposOS->tipos_equipos_listar_combo();
-                                    if ($tipos_equipos) {
-                                        echo '<option value="">Seleccionar</option>';
-                                        // Itera sobre los resultados y genera las opciones
-                                        foreach ($tipos_equipos as $row) {
-                                            echo '<option value="'.$row->tipo.'"> '.$row->tipo.' </option>';
-                                        }
-                                    } else {
-                                        echo '<option value="">No hay Tipos disponibles</option>';
-                                    }
-                                    ?>
+// Llamamos a la función para obtener los estados
+$tipos_equipos = $EquiposOS->tipos_equipos_listar_combo();
+if ($tipos_equipos) {
+    echo '<option value="">Seleccionar</option>';
+    // Itera sobre los resultados y genera las opciones
+    foreach ($tipos_equipos as $row) {
+        echo '<option value="' . $row->tipo . '"> ' . $row->tipo . ' </option>';
+    }
+} else {
+    echo '<option value="">No hay Tipos disponibles</option>';
+}
+?>
                             </select>
                         </div>
 
@@ -175,18 +229,18 @@
                             </select> -->
                             <select id="estado_equipo_actualizar" name="estado_equipo_actualizar" class="form-control">
                                 <?php
-                                    // Llamamos a la función para obtener los estados
-                                    $estados_equipos = $EquiposOS->estados_equipos_listar_combo();
-                                    if ($estados_equipos) {
-                                        echo '<option value="">Seleccionar</option>';
-                                        // Itera sobre los resultados y genera las opciones
-                                        foreach ($estados_equipos as $row) {
-                                            echo '<option value="' . $row->estado . '">' . $row->estado . '</option>';
-                                        }
-                                    } else {
-                                        echo '<option value="">No hay estados disponibles</option>';
+                                // Llamamos a la función para obtener los estados
+                                $estados_equipos = $EquiposOS->estados_equipos_listar_combo();
+                                if ($estados_equipos) {
+                                    echo '<option value="">Seleccionar</option>';
+                                    // Itera sobre los resultados y genera las opciones
+                                    foreach ($estados_equipos as $row) {
+                                        echo '<option value="' . $row->ID . '">' . $row->estado . '</option>';
                                     }
-                                    ?>
+                                } else {
+                                    echo '<option value="">No hay estados disponibles</option>';
+                                }
+                                ?>
                             </select>
                         </div>
                     </div>

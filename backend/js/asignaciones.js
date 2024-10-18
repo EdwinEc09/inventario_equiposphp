@@ -126,8 +126,8 @@ function agregar_asignacion() {
         data: {
             run: 'asignaciones', // Parámetro 'run'
             action: 'agregar_asignacion_js', // Parámetro 'action'
-            empleado_asignacion_json: empleado_asignacion, // Parámetro 'empleado_asignacion'
-            equipo_asignacion_json: equipo_asignacion, // Parámetro 'equipo_asignacion'
+            id_empleado_asignacion_json: empleado_asignacion, // Parámetro 'empleado_asignacion'
+            id_equipo_asignacion_json: equipo_asignacion, // Parámetro 'equipo_asignacion'
             fecha_asignacion_asignaciones_json: fecha_asignacion_asignaciones, // Parámetro 'fecha_asignacion_asignaciones'
             acta_firmada_asignacion_json: acta_firmada_asignacion, // Parámetro 'acta_firmada_asignacion'
         },

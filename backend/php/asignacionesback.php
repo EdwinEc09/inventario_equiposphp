@@ -24,7 +24,7 @@ class Asignaciones extends OutSourcing
     }
 
     // este es para que me devuelva todos los datos de una tabla
-    public function agregar_asignacion_json($empleado_asignacion_json, $equipo_asignacion_json, $fecha_asignacion_asignaciones_json, $acta_firmada_asignacion_json)
+    public function agregar_asignacion_json($id_empleado_asignacion_json, $id_equipo_asignacion_json, $fecha_asignacion_asignaciones_json, $acta_firmada_asignacion_json)
     {
         $conn = $this->dbConnect();
 
@@ -45,15 +45,16 @@ class Asignaciones extends OutSourcing
                             VALUES (?, ?, ?, ?, ?, ?);";
                 $stmt = $conn->prepare($sql);
 
-                // Ejecutar la consulta con los valores proporcionados
-                $stmt->execute([$empleado_asignacion_json, $equipo_asignacion_json, $fecha_asignacion_asignaciones_json, $fecha_creacion_json, $estado_asignacion_json, $acta_firmada_asignacion_json]);
+                // Ejecutar la consulta con los valores proporcionados (ID_empleado)
+                $stmt->execute([$id_empleado_asignacion_json, $id_equipo_asignacion_json, $fecha_asignacion_asignaciones_json, $fecha_creacion_json, $estado_asignacion_json, $acta_firmada_asignacion_json]);
 
                 // Si la inserción fue exitosa, actualizar el estado del equipo a 'asignado'
                 if ($stmt->rowCount() > 0) {
                     // Cambiar el estado del equipo a 'asignado' (estado = 2)
-                    $sql_update = "UPDATE equipos SET estado = 'Asignado' WHERE ID = ?;";
+                    // $sql_update = "UPDATE equipos SET estado = 'Asignado' WHERE ID = ?;";
+                    $sql_update = "UPDATE equipos SET estado = 2 WHERE ID = ?;";
                     $stmt_update = $conn->prepare($sql_update);
-                    $stmt_update->execute([$equipo_asignacion_json]);
+                    $stmt_update->execute([$id_equipo_asignacion_json]);
 
                     // Verificar si la actualización fue exitosa
                     if ($stmt_update->rowCount() > 0) {

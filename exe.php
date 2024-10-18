@@ -167,14 +167,33 @@ if (isset($_POST['run']) && isset($_POST['action'])) {
                     );
                     echo json_encode($pasar_tiposequipos_a_json);
                     break;
-                // agregar tipos de equipos
+
+                // agregar estado de eatadoequipos
                 case 'agregar_estadosequipos_js':
                     $pasar_estadosequipos_a_json = $EquiposOS->agregar_estadosequipos_json(
-                        $_POST['estados_equipos_tiposequipos_json'],
-                        $_POST['colorestado_equipos_tiposequipos_json']
+                        $_POST['agregar_estados_estadoequipos_json'],
+                        $_POST['agregar_colorestado_estadoequipos_json']
 
                     );
                     echo json_encode($pasar_estadosequipos_a_json);
+                    break;
+               // actualiza estado de eatadoequipos
+                case 'actualizar_estadosequipos_js':
+                    $pasar_estadosequipos_a_json = $EquiposOS->actualiza_estadosequipos_json(
+                        $_POST['actualizar_ID_estadoequipos_json'],
+                        $_POST['actualizar_estados_estadoequipos_json'],
+                        $_POST['actualizar_colorestado_estadoequipos_json']
+
+                    );
+                    echo json_encode($pasar_estadosequipos_a_json);
+                    break;
+
+                case 'obtener_estadoequipo_unico_js':
+                        // Obtener los datos de la base de datos
+                    $estadoequipos_unicos = $EquiposOS->obtener_estadoequipo_unico_json($_POST['id_estadoequipo_json']);
+    
+                    // Asegúrate de devolver los datos como JSON
+                    echo json_encode($estadoequipos_unicos);
                     break;
 
                 // default
@@ -195,8 +214,8 @@ if (isset($_POST['run']) && isset($_POST['action'])) {
 
                 case 'agregar_asignacion_js':
                     $pasar_asignaciones_a_json = $AsignacionesOS->agregar_asignacion_json(
-                        $_POST['empleado_asignacion_json'],
-                        $_POST['equipo_asignacion_json'],
+                        $_POST['id_empleado_asignacion_json'],
+                        $_POST['id_equipo_asignacion_json'],
                         $_POST['fecha_asignacion_asignaciones_json'],
                         $_POST['acta_firmada_asignacion_json']
 

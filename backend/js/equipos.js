@@ -61,7 +61,7 @@ function obtener_datos_equipos() {
                             <td class="py-3"><span class="badge badge-pill badge-success" style="color: #fff; background-color: ${color};">${equiposver.estado}</span></td>
                             <td class="py-3">
                                 <div class="position-relative">
-                                    <a style="margin-right: 7px;" class="link-dark d-inline-block" href="#" value="${equiposver.ID}" onclick="mostrar_datos_modalEquipos(${equiposver.ID})" title="Editar Equipos" data-toggle="modal" data-target="#modalactualizarequipos" >
+                                    <a style="margin-right: 7px;" class="link-dark d-inline-block" href="#" value="${equiposver.ID}" onclick="mostrar_datos_modalactualizarEquipos(${equiposver.ID})" title="Editar Equipos" data-toggle="modal" data-target="#modalactualizarequipos" >
                                         <i class="gd-reload icon-text"></i>
                                     </a>
                                     <a style="margin-right: 7px;" class="link-dark d-inline-block" href="#" title="Ver mas Informacion" onclick="mostrar_masinfo_modalEquipos(${equiposver.ID})">
@@ -295,7 +295,7 @@ function actualizar_equipos() {
 }
 
 // esta funcion hace que se muestre los datos del empleado antes de actualizarlos
-function mostrar_datos_modalEquipos(ID) {
+function mostrar_datos_modalactualizarEquipos(ID) {
     console.log(ID);
     $.ajax({
         url: "exe.php",
@@ -310,7 +310,16 @@ function mostrar_datos_modalEquipos(ID) {
             // actualizar_empleados(ID);
             // console.log("data : " + data + "si" + usuario);
             if (data) {
-                // console.log(data);
+                // se reemplaza el valor del dato pro datos sin espacios 
+                // solo hay que agregar mas datos a los cual se van a limpiar espacios
+                let propiedades_data = ['ID', 'marca', 'serial', 'direccion_mac_wifi', 'direccion_mac_ethenet', 'imei1', 'imei2', 'observacion'];
+
+                // Limpiar espacios en cada propiedad de os datos de la data
+                propiedades_data.forEach(function (propiedad) {
+                    if (data[propiedad]) {
+                        data[propiedad] = data[propiedad].trim();
+                    }
+                });
                 $('#id_equipo_actualizar').val(data.ID);
                 $('#tipo_equipo_actualizar').val(data.tipo);
                 $('#marca_equipo_actualizar').val(data.marca);

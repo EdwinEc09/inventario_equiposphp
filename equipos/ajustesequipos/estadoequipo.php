@@ -15,7 +15,7 @@
     </nav>
     <!-- End Breadcrumb -->
 
-    <button id="" type="submit" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalestadosequipos">Crear estados de equipos</button>
+    <button id="" type="submit" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalagregarestadosequipos">Crear estados de equipos</button>
 
     <!--  -->
     <div class="mb-3 mb-md-4 d-flex justify-content-between">
