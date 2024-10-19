@@ -23,7 +23,7 @@ function obtener_datos_asignacion() {
 
                 // Itera sobre los datos recibidos y genera las filas de la tabla
                 $.each(data, function (index, asignacionesver) {
-                    
+
                     // esto es por si el esta activo o inactivo , 1 es activo y 0 es inactivo
                     var estadoBadgeasignacion = asignacionesver.estado_asignacion == '1'
                         ? '<span class="badge badge-pill badge-success">Activo</span>'
@@ -32,7 +32,7 @@ function obtener_datos_asignacion() {
                         ? '<span class="badge badge-pill badge-success">✔️</span>'
                         : '<span class="badge badge-pill badge-danger">No</span>';
 
-                        // esta es para ver si tiene el acta firmada 
+                    // esta es para ver si tiene el acta firmada 
                     // var firmaactaBadgeasignacion = asignacionesver.acta_firmada == '0'
                     //     ? '<span class="badge badge-pill badge-success">Si</span>'
                     //     : '<span class="badge badge-pill badge-danger">No</span>';
@@ -49,10 +49,13 @@ function obtener_datos_asignacion() {
                             <td class="py-3">${firmaactaBadgeasignacion}</td>
                             <td class="py-3">
                                 <div class="position-relative">
-                                    <a class="link-dark d-inline-block" href="#editar-asignacion">
+                                    <a style="margin-right: 7px; class="link-dark d-inline-block" href="#editar-asignacion">
                                         <i class="gd-pencil icon-text"></i>
                                     </a>
-                                    <a class="link-dark d-inline-block" href="#ver-detalles">
+                                    <a style="margin-right: 7px; class="link-dark d-inline-block" href="#quitar-asignacion" onclick="quitar_asignacion(${asignacionesver.ID})">
+                                            <i class="gd-na icon-text"></i>
+                                    </a>
+                                    <a style="margin-right: 7px; class="link-dark d-inline-block" href="#ver-detalles">
                                         <i class="gd-eye icon-text"></i>
                                     </a>
                                 </div>
@@ -113,7 +116,7 @@ function agregar_asignacion() {
     let acta_firmada_asignacion = $('#acta_firmada_asignacion').val();
 
 
-    if (empleado_asignacion === "" || equipo_asignacion==="" || acta_firmada_asignacion==="") {
+    if (empleado_asignacion === "" || equipo_asignacion === "" || acta_firmada_asignacion === "") {
         alert("Los campos obligatorios no deben ir vaios");
         return;
     }
@@ -135,7 +138,7 @@ function agregar_asignacion() {
 
             // alert("se guardó");
             if (response.success) {
-                obtener_datos_equipos(); 
+                obtener_datos_equipos();
                 // alert(response.success);
                 // Alerta de éxito
                 var alerta_agregar_asignacion = `
@@ -156,7 +159,7 @@ function agregar_asignacion() {
                 $('#equipo_asignacion').val("");
                 $('#fecha_asignacion_asignaciones').val("");
                 $('#acta_firmada_asignacion').val("");
-         
+
 
                 // Añadir la alerta al contenedor
                 $('#alerta_agregar_asignacionhtml').html(alerta_agregar_asignacion);
@@ -190,4 +193,11 @@ function agregar_asignacion() {
             }
         }
     });
+}
+
+
+
+// esta funcion es para que se inactive la asignacion 
+function quitar_asignacion(ID){
+    alert("quieres quitar el: " +ID);
 }

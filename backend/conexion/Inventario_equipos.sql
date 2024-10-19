@@ -65,8 +65,8 @@ SELECT e.ID, te.tipo AS tipo_equipo, e.marca, e.serial, e.direccion_mac_wifi, e.
 insert into equipos (tipo, marca, serial, direccion_mac_wifi, direccion_mac_ethenet, imei1, imei2,fecha_creacion,estado,observacion) values ('PC','Lenovo','1128YUA8','direccion1234wifi','direccion12345ethenet','imei1222','imei2333','2024-05-01',1,'esta es una observacion de prueba');
 insert into equipos (tipo, marca, serial, direccion_mac_wifi, direccion_mac_ethenet, imei1, imei2,fecha_creacion,estado,observacion) values ('celular','sansung A20','123456789','direccion1234wifi','direccion12345ethenet','imei1222','imei2333','2024-05-01',2, 'esta es una pruena de la descripcion de prueba 2');
 
-UPDATE equipos SET estado = 1 WHERE estado  = 'Disponible';
-UPDATE equipos SET estado = 'Asignado' WHERE ID = 2;
+UPDATE equipos SET estado = 1 WHERE estado  = 'Asignado';
+UPDATE equipos SET estado = 1 WHERE estado = 2;
 UPDATE equipos SET tipo = ?, marca = ?, serial = ?, direccion_mac_wifi = ?, direccion_mac_ethenet = ?, imei1 = ?, imei2 = ?,estado =?,observacion =? WHERE ID = ?
 
 /*este es para el estado de equipos*/
@@ -82,7 +82,7 @@ select * from estado_equipos;
 
 select distinct estado from estado_equipos where  estado not in ('');
 
-UPDATE estado_equipos SET estado = 'nuevo estado 2' , color_estado= '#4e4b09' WHERE ID = 10;
+UPDATE estado_equipos SET estado = 'Asignado' , color_estado= '#4e4b09' WHERE ID = 2;
 
 insert into estado_equipos (estado) values ('Asignado');
 insert into estado_equipos (estado) values ('Disponible');
