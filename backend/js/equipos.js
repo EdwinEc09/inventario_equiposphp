@@ -58,7 +58,7 @@ function obtener_datos_equipos() {
                             <td class="py-3">${equiposver.imei1}</td>
                             <td class="py-3">${equiposver.imei2}</td>
                             <td class="py-3">${equiposver.fecha_creacion}</td>
-                            <td class="py-3"><span class="badge badge-pill badge-success" style="color: #fff; background-color: ${color};">${equiposver.estado}</span></td>
+                            <td class="py-3"><span class="badge badge-pill badge-success" style="color: #fff; background-color: ${color};">${equiposver.nombre_estado}</span></td>
                             <td class="py-3">
                                 <div class="position-relative">
                                     <a style="margin-right: 7px;" class="link-dark d-inline-block" href="#" value="${equiposver.ID}" onclick="mostrar_datos_modalactualizarEquipos(${equiposver.ID})" title="Editar Equipos" data-toggle="modal" data-target="#modalactualizarequipos" >

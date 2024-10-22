@@ -170,14 +170,19 @@ function obtener_datos_estadosequipos() {
 
                 // Itera sobre los datos recibidos y genera las filas de la tabla
                 $.each(data, function (index, estadosequiposver) {
+                    // esto es por si el esta activo o inactivo , 1 es activo y 0 es inactivo
+                    var estado_estadoequipo = estadosequiposver.estado == '1'
+                        ? '<span class="badge badge-pill badge-success">Activo</span>'
+                        : '<span class="badge badge-pill badge-danger">Inactivo</span>';
+
                     let color = estadosequiposver.color_estado;
 
                     var fila = `
                         <tr>
-                            <td class="py-3">${index + 1}</td>
-                            <td class="align-middle py-3">${estadosequiposver.estado}</td>
-                            <td class="align-middle py-3"><span class="badge badge-pill badge-success" style="color: #fff; background-color: ${color};">${estadosequiposver.estado}</span></td>
-                     
+                            <td class="py-3"><input type="checkbox" name="id_checkbx_elegidos_estadoequipo[]" value="${estadosequiposver.ID}"></td>
+                            <td class="align-middle py-3">${estadosequiposver.nombre_estado}</td>
+                            <td class="align-middle py-3"><span class="badge badge-pill badge-success" style="color: #fff; background-color: ${color};">${estadosequiposver.nombre_estado}</span></td>
+                            <td class="align-middle py-3">${estado_estadoequipo}</td>
                             <td class="py-3">
                                   <div class="position-relative">
                                     <a style="margin-right: 7px;" class="link-dark d-inline-block" href="#" value="${estadosequiposver.ID}" onclick="mostrar_datos_modalactualizarestadosequipos(${estadosequiposver.ID})" title="Editar Equipos" data-toggle="modal" data-target="#modalactualizarestadosequipos" >
@@ -185,6 +190,9 @@ function obtener_datos_estadosequipos() {
                                     </a>
                                     <a style="margin-right: 7px;" class="link-dark d-inline-block" href="#" title="Ver mas Informacion" onclick="mostrar_masinfo_modalEquipos(${estadosequiposver.ID})">
                                         <i class="gd-eye icon-text"></i>
+                                    </a>
+                                    <a style="margin-right: 7px; class="link-dark d-inline-block" href="#Inactivar-estadoequipos">
+                                            <i class="gd-na icon-text"></i>
                                     </a>
                               
                                 </div>
@@ -296,7 +304,7 @@ function mostrar_datos_modalactualizarestadosequipos(ID) {
             if (data) {
                 // console.log(data);
                 var mostrar_color = data.color_estado.trim();   //convierte el dato en string(texto)
-                var data_estado = data.estado.trim();   //convierte el dato en string(texto)
+                var data_estado = data.nombre_estado.trim();   //convierte el dato en string(texto)
                 $('#actualizar_ID_estadoequipos').val(data.ID);
                 $('#actualizar_estados_estadoequipos').val(data_estado);
                 $('#actualizar_colorestado_estadoequipos').val(mostrar_color);
@@ -326,7 +334,7 @@ function actualizar_estadosequipos() {
     } else {
         $.ajax({
             url: "exe.php",
-            type: "POST", 
+            type: "POST",
             dataType: "JSON",
             data: {
                 run: 'equipos',
@@ -345,6 +353,95 @@ function actualizar_estadosequipos() {
                 }
                 else {
                     alert(response.error);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                // Manejo de errores
+                if (jqXHR.status === 0) {
+                    alert('No conectado: Verifica la red.');
+                } else if (jqXHR.status == 404) {
+                    alert('Página no encontrada [404].');
+                } else if (jqXHR.status == 500) {
+                    alert('Error interno del servidor [500].');
+                } else if (textStatus === 'parsererror') {
+                    console.log(jqXHR.responseText);
+                    alert('Error al analizar JSON.');
+                } else if (textStatus === 'timeout') {
+                    alert('Error de tiempo de espera.');
+                } else if (textStatus === 'abort') {
+                    alert('Solicitud Ajax abortada.');
+                } else {
+                    console.log('Error no capturado: ' + jqXHR.responseText);
+                }
+            }
+        });
+    }
+}
+
+
+
+// -----------------------------------------------------------------
+// Evento para seleccionar o deseleccionar todos los checkboxes ademas de anviar el valor a la db
+$('#seleccionarTodos_estadoequipo').on('click', function () {
+    // Obtener el estado actual de todos los checkboxes
+    let todosSeleccionados = $('input[name="id_checkbx_elegidos_estadoequipo[]"]').length === $('input[name="id_checkbx_elegidos_estadoequipo[]"]:checked').length;
+    // Marcar o desmarcar todos los checkboxes
+    $('input[name="id_checkbx_elegidos_estadoequipo[]"]').prop('checked', !todosSeleccionados);
+    // Verificar si al menos un checkbox está seleccionado
+    let seleccionados = $('input[name="id_checkbx_elegidos_estadoequipo[]"]:checked').length > 0;
+    // se agrega el boton que se quiere apagar comunmente es el que abre el modal
+    $('#btn-modalinactivarvariosestadoequipos').prop('disabled', !seleccionados);
+});
+
+// Evento para detectar cambios individuales en los checkboxes
+$(document).on('change', 'input[name="id_checkbx_elegidos_estadoequipo[]"]', function () {
+    let seleccionados = $('input[name="id_checkbx_elegidos_estadoequipo[]"]:checked').length > 0;
+    // se agrega el boton que se quiere apagar comun mente es el que abre el modal
+    $('#btn-modalinactivarvariosestadoequipos').prop('disabled', !seleccionados);
+});
+// -----------------------------------------------------------------
+
+
+
+// Evento al hacer clic en el botón "Enviar"
+$('#btn_inactivar_estadoequipos').on('click', function () {
+    let idsSeleccionados = $('input[name="id_checkbx_elegidos_estadoequipo[]"]:checked').map(function () {
+        return $(this).val();
+    }).get();
+
+    if (idsSeleccionados.length > 0) {
+        inactivar_estadoequipo(idsSeleccionados);
+        // alert("si tienes ID seleccionados y son: " + idsSeleccionados);
+    } else {
+        alert("No has seleccionado ningún empleado.");
+    }
+});
+
+// esta es la funcion que inactiva varios etados 
+function inactivar_estadoequipo(idsSeleccionados) {
+    let estado_estadoequipos_variosjs = $('#estado_estadoequipos_varios').val();
+
+    if (estado_estadoequipos_variosjs === "") {
+        alert("el campo no puede ir vacio");
+
+    } else {
+        $.ajax({
+            url: "exe.php", // Archivo que procesará la solicitud
+            type: "POST", // Método de envío
+            dataType: "JSON", // Esperamos respuesta en formato JSON
+            data: {
+                run: 'equipos', // Parámetro 'run'
+                action: 'inactivar_activar_varios_estadoequipo_js', // Parámetro 'action'
+                ids_estadoseqipos: idsSeleccionados, // Enviar los IDs seleccionados
+                estado_estadoequipos_varios_json: estado_estadoequipos_variosjs
+            },
+            success: function (data) {
+                // loading(false); // Quitar el indicador de carga
+                if (data.error) {
+                    alert('Error: ' + data.error); // Mostrar mensaje de error si existe
+                } else {
+                    obtener_datos_estadosequipos();
+                    alert(data.success);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {

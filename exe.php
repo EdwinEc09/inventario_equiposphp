@@ -196,6 +196,15 @@ if (isset($_POST['run']) && isset($_POST['action'])) {
                     echo json_encode($estadoequipos_unicos);
                     break;
 
+
+                // inactivar varios estados equipos
+                case 'inactivar_activar_varios_estadoequipo_js':
+                    // Obtener los datos de la base de datos
+                    $empleados_correo = $EquiposOS->activar_inactivar_varios_estadoequipos_json($_POST['ids_estadoseqipos'],$_POST['estado_estadoequipos_varios_json']);
+                
+                    // Asegúrate de devolver los datos como JSON 
+                    echo json_encode($empleados_correo);
+                    break;
                 // default
                 default:
                     echo json_encode(['error' => 'Acción no válida en el case equipos']);

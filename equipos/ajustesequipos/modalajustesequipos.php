@@ -166,18 +166,18 @@
 
                             <select id="tipo_equipo_actualizar" name="tipo_equipo_actualizar" class="form-control">
                                 <?php
-// Llamamos a la función para obtener los estados
-$tipos_equipos = $EquiposOS->tipos_equipos_listar_combo();
-if ($tipos_equipos) {
-    echo '<option value="">Seleccionar</option>';
-    // Itera sobre los resultados y genera las opciones
-    foreach ($tipos_equipos as $row) {
-        echo '<option value="' . $row->tipo . '"> ' . $row->tipo . ' </option>';
-    }
-} else {
-    echo '<option value="">No hay Tipos disponibles</option>';
-}
-?>
+                                    // Llamamos a la función para obtener los estados
+                                    $tipos_equipos = $EquiposOS->tipos_equipos_listar_combo();
+                                    if ($tipos_equipos) {
+                                        echo '<option value="">Seleccionar</option>';
+                                        // Itera sobre los resultados y genera las opciones
+                                        foreach ($tipos_equipos as $row) {
+                                            echo '<option value="' . $row->tipo . '"> ' . $row->tipo . ' </option>';
+                                        }
+                                    } else {
+                                        echo '<option value="">No hay Tipos disponibles</option>';
+                                    }
+                                    ?>
                             </select>
                         </div>
 
@@ -229,18 +229,18 @@ if ($tipos_equipos) {
                             </select> -->
                             <select id="estado_equipo_actualizar" name="estado_equipo_actualizar" class="form-control">
                                 <?php
-                                // Llamamos a la función para obtener los estados
-                                $estados_equipos = $EquiposOS->estados_equipos_listar_combo();
-                                if ($estados_equipos) {
-                                    echo '<option value="">Seleccionar</option>';
-                                    // Itera sobre los resultados y genera las opciones
-                                    foreach ($estados_equipos as $row) {
-                                        echo '<option value="' . $row->ID . '">' . $row->estado . '</option>';
+                                    // Llamamos a la función para obtener los estados
+                                    $estados_equipos = $EquiposOS->estados_equipos_listar_combo();
+                                    if ($estados_equipos) {
+                                        echo '<option value="">Seleccionar</option>';
+                                        // Itera sobre los resultados y genera las opciones
+                                        foreach ($estados_equipos as $row) {
+                                            echo '<option value="' . $row->ID . '">' . $row->nombre_estado . '</option>';
+                                        }
+                                    } else { 
+                                        echo '<option value="">No hay estados disponibles</option>';
                                     }
-                                } else {
-                                    echo '<option value="">No hay estados disponibles</option>';
-                                }
-                                ?>
+                                    ?>
                             </select>
                         </div>
                     </div>
@@ -255,6 +255,58 @@ if ($tipos_equipos) {
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 <button type="button" id="btn_actualizar_equipos" class="btn btn-primary">Actualizar <i
                         class="gd-save icon-text"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
+
+
+<!-- Modal inactivr varios estados de equipos verempleados.php -->
+<div id="modalinactivarvariosestadoequipos" class="modal fade" role="dialog"
+    aria-labelledby="modalinactivarvariosestadoequipos" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Actualizar varios
+                    empleados</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Form -->
+                <div>
+                    <div class="form-row">
+                        <div id="id_estadoequipos_varios">
+                        </div>
+
+                        <div class="form-group col-12 col-md-12">
+                            <label
+                                for="estado_estadoequipos_varios">Estado
+                                de
+                                Empleado</label>
+                            <select id="estado_estadoequipos_varios"
+                                name="estado_estadoequipos_varios"
+                                class="form-control">
+                                <option value>Seleccionar</option>
+                                <option value="0">Inactivo</option>
+                                <option value="1">Activo</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <!-- End Form -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Cerrar</button>
+                    <button type="button"
+                        id="btn_inactivar_estadoequipos"
+                        class="btn btn-primary">Actualizar <i
+                            class="gd-save icon-text"></i></button>
+                </div>
             </div>
         </div>
     </div>

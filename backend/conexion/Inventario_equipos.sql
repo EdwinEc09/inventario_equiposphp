@@ -56,6 +56,8 @@ create table equipos (
 
 select * from equipos;
 
+SELECT e.ID, e.tipo, e.marca, e.serial, e.direccion_mac_wifi, e.direccion_mac_ethenet, e.imei1, e.imei2, e.fecha_creacion,e.estado, ee.nombre_estado,ee.color_estado, e.observacion FROM equipos e JOIN estado_equipos ee ON e.estado = ee.ID;
+
 select ID,marca,serial,tipo from equipos where  estado = 'Disponible';
 
 SELECT e.ID, e.tipo, e.marca, e.serial, e.direccion_mac_wifi, e.direccion_mac_ethenet, e.imei1, e.imei2, e.fecha_creacion, ee.estado,ee.color_estado, e.observacion FROM equipos e JOIN estado_equipos ee ON e.estado = ee.estado;
@@ -66,7 +68,7 @@ insert into equipos (tipo, marca, serial, direccion_mac_wifi, direccion_mac_ethe
 insert into equipos (tipo, marca, serial, direccion_mac_wifi, direccion_mac_ethenet, imei1, imei2,fecha_creacion,estado,observacion) values ('celular','sansung A20','123456789','direccion1234wifi','direccion12345ethenet','imei1222','imei2333','2024-05-01',2, 'esta es una pruena de la descripcion de prueba 2');
 
 UPDATE equipos SET estado = 1 WHERE estado  = 'Asignado';
-UPDATE equipos SET estado = 1 WHERE estado = 2;
+UPDATE equipos SET estado = 2 WHERE estado = 7;
 UPDATE equipos SET tipo = ?, marca = ?, serial = ?, direccion_mac_wifi = ?, direccion_mac_ethenet = ?, imei1 = ?, imei2 = ?,estado =?,observacion =? WHERE ID = ?
 
 /*este es para el estado de equipos*/
@@ -74,17 +76,25 @@ DROP TABLE estado_equipos;
 
 create table estado_equipos (
 	ID int identity (1,1) primary key,
-	estado char(50) null,
-	color_estado char(100) null
+	nombre_estado char(50) null,
+	color_estado char(100) null,
+	estado bit,
+	tipo_dato bit default 1,
+	fecha_registro datetime,
+	fecha_actualizacion datetime
 );
 
-select * from estado_equipos;
-
+select * from estado_equipos where tipo_dato not in ('0');
+select * from equipos;
+SELECT * FROM equipos WHERE ID = 1
 select distinct estado from estado_equipos where  estado not in ('');
 
-UPDATE estado_equipos SET estado = 'Asignado' , color_estado= '#4e4b09' WHERE ID = 2;
+UPDATE estado_equipos SET tipo_dato = 1 WHERE ID = 3;
 
-insert into estado_equipos (estado) values ('Asignado');
+UPDATE estado_equipos SET tipo_dato = 1 WHERE ID = 1 and 2 and 3;
+
+insert into estado_equipos (nombre_estado,color_estado,estado,tipo_dato) values ('Disponible','#4e4b09',1,1);
+insert into estado_equipos (nombre_estado,color_estado,estado,tipo_dato) values ('Asignado','#4e4b09',1,0);
 insert into estado_equipos (estado) values ('Disponible');
 insert into estado_equipos (estado) values ('Averiado');
 insert into estado_equipos (estado) values ('Robado');
@@ -124,8 +134,8 @@ create table asignaciones(
 	estado_asignacion bit not null,
 	acta_firmada bit not null
 
-	FOREIGN KEY (id_empleado) REFERENCES empleados(ID),
-    FOREIGN KEY (id_equipos) REFERENCES equipos(ID)
+	--FOREIGN KEY (id_empleado) REFERENCES empleados(ID),
+ --   FOREIGN KEY (id_equipos) REFERENCES equipos(ID)
 );
 
 select * from asignaciones;

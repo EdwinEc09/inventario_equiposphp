@@ -15,31 +15,36 @@
     </nav>
     <!-- End Breadcrumb -->
 
-    <button id="" type="submit" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalagregarestadosequipos">Crear estados de equipos</button>
 
     <!--  -->
     <div class="mb-3 mb-md-4 d-flex justify-content-between">
         <div class="h3 mb-0">Estados de equipos</div>
+        <button id="" type="submit" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalagregarestadosequipos">Crear estados de equipos</button>
+       <!-- boton para enviar correo desde emailjs  -->
+       <button id="btn-modalinactivarvariosestadoequipos" type="submit" class="btn btn-primary float-right"  data-toggle="modal" data-target="#modalinactivarvariosestadoequipos" disabled >Activar - inactivar</button>
+        <!--  -->
     </div>
 
-
+ 
     <!-- Users -->
     <div class="table-responsive-xl" >
         <table class="table text-nowrap mb-0">
             <thead >
                 <tr>
-                    <th class="font-weight-semi-bold border-top-0 py-3">#</th>
-                    <th class="font-weight-semi-bold border-top-0 py-3">Estado</th>
+                    <th class="font-weight-semi-bold border-top-0 py-2"><button type="button" id="seleccionarTodos_estadoequipo">#</button></th>
+                    <!-- <th class="font-weight-semi-bold border-top-0 py-3">#</th> -->
+                    <th class="font-weight-semi-bold border-top-0 py-3">Nombre del Estado</th>
                     <th class="font-weight-semi-bold border-top-0 py-3">Color Asignado</th>
+                    <th class="font-weight-semi-bold border-top-0 py-3">Estado</th>
                     <th class="font-weight-semi-bold border-top-0 py-3">acciones</th>
                 </tr>
             </thead>
             <tbody id="tabla_verestadosequipos">
-            
+
 
                     <td class="text-center"> NO HAY DATOS </td>
-            
-                 
+
+
             </tbody>
         </table>
 
@@ -54,6 +59,3 @@
     <!-- End Users -->
 </div>
 </div>
-
-
-
