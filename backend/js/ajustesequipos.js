@@ -188,7 +188,7 @@ function obtener_datos_estadosequipos() {
                                     <a style="margin-right: 7px;" class="link-dark d-inline-block" href="#" value="${estadosequiposver.ID}" onclick="mostrar_datos_modalactualizarestadosequipos(${estadosequiposver.ID})" title="Editar Equipos" data-toggle="modal" data-target="#modalactualizarestadosequipos" >
                                         <i class="gd-reload icon-text"></i>
                                     </a>
-                                    <a style="margin-right: 7px;" class="link-dark d-inline-block" href="#" title="Ver mas Informacion" onclick="mostrar_masinfo_modalEquipos(${estadosequiposver.ID})">
+                                    <a style="margin-right: 7px;" class="link-dark d-inline-block" href="#" title="Ver mas Informacion" data-toggle="modal" data-target="#modalverlogsestadoequipos"">
                                         <i class="gd-eye icon-text"></i>
                                     </a>
                                     <a style="margin-right: 7px; class="link-dark d-inline-block" href="#Inactivar-estadoequipos">

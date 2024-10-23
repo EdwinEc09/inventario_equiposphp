@@ -312,3 +312,50 @@
     </div>
 </div>
 <!-- End Modal -->
+
+
+
+
+
+<!-- Modal ver mas informacion osea logs de estado de equipos estadoequipo.php -->
+<div id="modalverlogsestadoequipos" class="modal fade" role="dialog"
+    aria-labelledby="modalverlogsestadoequipos" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Logs de estado equipos</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Form aqui van los campos omlo que ponga -->
+                <div class="form-row">
+                    <div class="form-group col-6 col-md-6">
+                        <label for="id_motrarmasinfo_empleados">Id del
+                            logs</label>
+                        <div class="input-group">
+
+                            <input type="text"
+                                class="form-control form-control-onfocus-inherit bg-transparent small text-muted"
+                                value="este es un texxto 1"
+                                id="id_motrarmasinfo_empleados"
+                                readonly>
+                        </div>
+                    </div>
+                    <!-- ESTE ES PARA EL segundo campo -->
+
+                </div>
+                <!-- End Form -->
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Cerrar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->

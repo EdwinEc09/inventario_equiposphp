@@ -62,7 +62,7 @@ class Equipos extends OutSourcing
         if ($conn) {
             // este es para que me puestre todos execpto los logs 0 -
             // 1 es un registro valido - 0 es un log osea un registro historico
-            $sql = "SELECT * FROM estado_equipos where tipo_dato = 1";
+            $sql = "SELECT * FROM estado_equipos ";
             $stmt = $conn->prepare($sql);
             // $stmt->execute([$id_prueba]);
             $stmt->execute(); // Sin parámetros porque queremos obtener todos los registros
@@ -195,13 +195,28 @@ class Equipos extends OutSourcing
             $fecha_registro_json = date("Y-m-d h:i:s A");
 
             // Consulta para insertar un nuevo empleado
-            $sql = "INSERT INTO estado_equipos (nombre_estado,color_estado,estado,tipo_dato,fecha_registro) VALUES (?,?,?,?,?)";
+            $sql = "INSERT INTO estado_equipos (nombre_estado,color_estado,estado,fecha_registro) VALUES (?,?,?,?)";
             $stmt = $conn->prepare($sql);
 
             // Ejecutar la consulta con los valores proporcionados
-            $stmt->execute([$agregar_estados_estadoequipos_json, $agregar_colorestado_estadoequipos_json, 1, 1, $fecha_registro_json]);
+            $stmt->execute([$agregar_estados_estadoequipos_json, $agregar_colorestado_estadoequipos_json, 1, $fecha_registro_json]);
             // Si la inserción fue exitosa, devolver true o algún mensaje
             if ($stmt->rowCount() > 0) {
+                   // Obtener el ID insertado
+            $lastInsertId = $conn->lastInsertId();
+
+            // Registro en la tabla de logs
+            $sql_log = "INSERT INTO estado_equipos_logs (estado_id, nombre_estado, color_estado, estado, fecha_registro, tipo_operacion) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt_log = $conn->prepare($sql_log);
+            $stmt_log->execute([
+                $lastInsertId, 
+                $agregar_estados_estadoequipos_json, 
+                $agregar_colorestado_estadoequipos_json, 
+                1, 
+                $fecha_registro_json,
+                'Inserción'
+                // $usuario
+            ]);
                 return ['success' => 'estado equipo agregado exitosamente.'];
             } else {
                 return ['error' => 'Error al insertar el  estado de equipos.'];
@@ -217,30 +232,34 @@ class Equipos extends OutSourcing
     {
         $conn = $this->dbConnect();
         if ($conn) {
-            $fecha_actualizacion_json = date("Y-m-d h:i:s A"); 
-    
-            // Obtener los datos del registro actual
-            $sql_select = "SELECT nombre_estado, color_estado, estado FROM estado_equipos WHERE ID = ?";
-            $stmt_select = $conn->prepare($sql_select);
-            $stmt_select->execute([$actualizar_ID_estadoequipos_json]);
-            $registro_actual = $stmt_select->fetch();
-    
-            if ($registro_actual) {
+            // $fecha_actualizacion_json = date("Y-m-d h:i:s A");  
+            $fecha_actualizacion_json = date("Y-m-d h:i:s A");
+            // Actualizar el registro original con los nuevos datos proporcionados por el usuario
+            $sql_update = "UPDATE estado_equipos SET nombre_estado = ?, color_estado = ?, estado = ?, fecha_actualizacion = ? WHERE ID = ?";
+            $stmt_update = $conn->prepare($sql_update);
+            $stmt_update->execute([$actualizar_estados_estadoequipos_json, $actualizar_colorestado_estadoequipos_json, 1, $fecha_actualizacion_json, $actualizar_ID_estadoequipos_json]);
+            
+
+            if ($stmt_update) {
+                // Obtener los datos del registro actual
+                $sql_select = "SELECT nombre_estado, color_estado, estado,fecha_registro FROM estado_equipos WHERE ID = ?";
+                $stmt_select = $conn->prepare($sql_select);
+                $stmt_select->execute([$actualizar_ID_estadoequipos_json]);
+                $registro_actual = $stmt_select->fetch();
+
+
                 // Guardar el registro actual en la tabla de logs
-                $sql_log = "INSERT INTO estado_equipos_logs (estado_id, nombre_estado, color_estado, estado, fecha_actualizacion) VALUES (?, ?, ?, ?, ?)";
+                $sql_log = "INSERT INTO estado_equipos_logs (estado_id, nombre_estado, color_estado, estado,fecha_registro, fecha_actualizacion,tipo_operacion) VALUES (?, ?, ?, ?, ?,?,?)";
                 $stmt_log = $conn->prepare($sql_log);
                 $stmt_log->execute([
                     $actualizar_ID_estadoequipos_json, // ID del estado original
                     $registro_actual['nombre_estado'], // Nombre estado anterior
                     $registro_actual['color_estado'], // Color estado anterior
                     $registro_actual['estado'], // Estado anterior
-                    $fecha_actualizacion_json
+                    $registro_actual['fecha_registro'], // Estado anterior
+                    $fecha_actualizacion_json,
+                    'Actualización'
                 ]);
-    
-                // Actualizar el registro original con los nuevos datos proporcionados por el usuario
-                $sql_update = "UPDATE estado_equipos SET nombre_estado = ?, color_estado = ?, estado = ?, fecha_actualizacion = ? WHERE ID = ?";
-                $stmt_update = $conn->prepare($sql_update);
-                $stmt_update->execute([$actualizar_estados_estadoequipos_json, $actualizar_colorestado_estadoequipos_json, 1, $fecha_actualizacion_json, $actualizar_ID_estadoequipos_json]);
     
                 return ['success' => 'Registro actualizado y se ha creado un log exitosamente.'];
             } else {
@@ -251,7 +270,7 @@ class Equipos extends OutSourcing
         }
     }
     
-// bien
+// bien 
 
 
 

@@ -79,26 +79,36 @@ create table estado_equipos (
 	nombre_estado char(50) null,
 	color_estado char(100) null,
 	estado bit,
-	tipo_dato bit default 1,
 	fecha_registro datetime,
-	fecha_actualizacion datetime
+	fecha_actualizacion datetime,
 );
 
-select * from estado_equipos where tipo_dato not in ('0');
+--select * from estado_equipos where tipo_dato not in ('0');
 select * from equipos;
 SELECT * FROM equipos WHERE ID = 1
 select distinct estado from estado_equipos where  estado not in ('');
 
-UPDATE estado_equipos SET tipo_dato = 1 WHERE ID = 3;
+UPDATE estado_equipos SET estado = 1 WHERE ID = 3;
 
-UPDATE estado_equipos SET tipo_dato = 1 WHERE ID = 1 and 2 and 3;
+insert into estado_equipos (nombre_estado,color_estado,estado) values ('Disponible','#4e4b09',1);
+insert into estado_equipos (nombre_estado,color_estado,estado) values ('Asignado','#4e4b09',1);
 
-insert into estado_equipos (nombre_estado,color_estado,estado,tipo_dato) values ('Disponible','#4e4b09',1,1);
-insert into estado_equipos (nombre_estado,color_estado,estado,tipo_dato) values ('Asignado','#4e4b09',1,0);
-insert into estado_equipos (estado) values ('Disponible');
-insert into estado_equipos (estado) values ('Averiado');
-insert into estado_equipos (estado) values ('Robado');
-insert into estado_equipos (estado) values ('Otrosss');
+select * from estado_equipos;
+select*from estado_equipos_logs;
+
+DROP TABLE estado_equipos_logs;
+
+CREATE TABLE estado_equipos_logs (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    estado_id INT,
+    nombre_estado CHAR(50),
+    color_estado CHAR(100),
+    estado BIT,
+    fecha_registro DATETIME,
+    fecha_actualizacion DATETIME,
+    tipo_operacion CHAR(20), -- "Inserción" o "Actualización"
+    usuario VARCHAR(50)
+);
 
 
 /*este es para tipo de equipo*/
