@@ -45,7 +45,8 @@
 <!-- estados de equipos ---------------------------------------------------------------------------- -->
 
 <!-- Modal agregar  estado de equipos -->
-<div id="modalagregarestadosequipos" class="modal fade" role="dialog" aria-labelledby="modalagregarestadosequipos" aria-hidden="true">
+<div id="modalagregarestadosequipos" class="modal fade" role="dialog" aria-labelledby="modalagregarestadosequipos"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -71,7 +72,8 @@
                         </div> -->
                         <div class="form-group col-12 col-md-12">
                             <label for="agregar_colorestado_estadoequipos">Seleccionar Color</label>
-                            <input type="color" class="form-control" id="agregar_colorestado_estadoequipos" name="agregar_colorestado_estadoequipos">
+                            <input type="color" class="form-control" id="agregar_colorestado_estadoequipos"
+                                name="agregar_colorestado_estadoequipos">
                         </div>
                     </div>
                 </div>
@@ -88,7 +90,8 @@
 
 
 <!-- Modal actualizar  estado de equipos -->
-<div id="modalactualizarestadosequipos" class="modal fade" role="dialog" aria-labelledby="modalactualizarestadosequipos" aria-hidden="true">
+<div id="modalactualizarestadosequipos" class="modal fade" role="dialog" aria-labelledby="modalactualizarestadosequipos"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -102,15 +105,14 @@
                 <!-- Form -->
                 <div>
                     <div class="form-row">
-                    <div class="form-group col-6 col-md-12">
-                        <label for="actualizar_ID_estadoequipos">ID del estado</label>
-                        <div class="input-group">
-                            <input type="text"
-                                class="form-control form-control-onfocus-inherit bg-transparent small text-muted"
-                                id="actualizar_ID_estadoequipos"
-                                readonly>
+                        <div class="form-group col-6 col-md-12">
+                            <label for="actualizar_ID_estadoequipos">ID del estado</label>
+                            <div class="input-group">
+                                <input type="text"
+                                    class="form-control form-control-onfocus-inherit bg-transparent small text-muted"
+                                    id="actualizar_ID_estadoequipos" readonly>
+                            </div>
                         </div>
-                    </div>
                         <div class="form-group col-12 col-md-12">
                             <label for="actualizar_estados_estadoequipos">Estados</label>
                             <input type="text" class="form-control" value id="actualizar_estados_estadoequipos"
@@ -119,7 +121,8 @@
                         <!-- campo colores  -->
                         <div class="form-group col-12 col-md-12">
                             <label for="actualizar_colorestado_estadoequipos">Seleccionar Color</label>
-                            <input type="color" class="form-control" id="actualizar_colorestado_estadoequipos" name="actualizar_colorestado_estadoequipos">
+                            <input type="color" class="form-control" id="actualizar_colorestado_estadoequipos"
+                                name="actualizar_colorestado_estadoequipos">
                         </div>
                     </div>
                 </div>
@@ -127,7 +130,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" id="btn_actuualizar_estadosequipos" class="btn btn-primary">Actualizar Cambios</button>
+                <button type="button" id="btn_actuualizar_estadosequipos" class="btn btn-primary">Actualizar
+                    Cambios</button>
             </div>
         </div>
     </div>
@@ -270,8 +274,7 @@ if ($estados_equipos) {
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Actualizar varios
                     empleados</h5>
-                <button type="button" class="close" data-dismiss="modal"
-                    aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -283,12 +286,10 @@ if ($estados_equipos) {
                         </div>
 
                         <div class="form-group col-12 col-md-12">
-                            <label
-                                for="estado_estadoequipos_varios">Estado
+                            <label for="estado_estadoequipos_varios">Estado
                                 de
                                 Empleado</label>
-                            <select id="estado_estadoequipos_varios"
-                                name="estado_estadoequipos_varios"
+                            <select id="estado_estadoequipos_varios" name="estado_estadoequipos_varios"
                                 class="form-control">
                                 <option value>Seleccionar</option>
                                 <option value="0">Inactivo</option>
@@ -300,11 +301,8 @@ if ($estados_equipos) {
                     <!-- End Form -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                        data-dismiss="modal">Cerrar</button>
-                    <button type="button"
-                        id="btn_inactivar_estadoequipos"
-                        class="btn btn-primary">Actualizar <i
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btn_inactivar_estadoequipos" class="btn btn-primary">Actualizar <i
                             class="gd-save icon-text"></i></button>
                 </div>
             </div>
@@ -318,44 +316,73 @@ if ($estados_equipos) {
 
 
 <!-- Modal ver mas informacion osea logs de estado de equipos estadoequipo.php -->
-<div id="modalverlogsestadoequipos" class="modal fade" role="dialog"
-    aria-labelledby="modalverlogsestadoequipos" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div id="modalverlogsestadoequipos" class="modal fade" role="dialog" aria-labelledby="modalverlogsestadoequipos" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Logs de estado equipos</h5>
-                <button type="button" class="close" data-dismiss="modal"
-                    aria-label="Close">
+                <h5 class="modal-title">Logs de estado equipos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <!-- Form aqui van los campos omlo que ponga -->
-                <div class="form-row">
-                    <div class="form-group col-6 col-md-6">
-                        <label for="id_motrarmasinfo_empleados">Id del
-                            logs</label>
-                        <div class="input-group">
-
-                            <input type="text"
-                                class="form-control form-control-onfocus-inherit bg-transparent small text-muted"
-                                value="este es un texxto 1"
-                                id="id_motrarmasinfo_empleados"
-                                readonly>
-                        </div>
-                    </div>
-                    <!-- ESTE ES PARA EL segundo campo -->
-
+            <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
+                <!-- Contenedor para la tabla -->
+                <div class="table-responsive">
+                    <table class="table text-nowrap mb-0">
+                        <thead>
+                            <tr>
+                                <th class="font-weight-semi-bold border-top-0 py-2">#</th>
+                                <th class="font-weight-semi-bold border-top-0 py-2">Customer</th>
+                                <th class="font-weight-semi-bold border-top-0 py-2">Phone</th>
+                                <th class="font-weight-semi-bold border-top-0 py-2">Amount</th>
+                                <th class="font-weight-semi-bold border-top-0 py-2">Status</th>
+                                <th class="font-weight-semi-bold border-top-0 py-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-3">149531</td>
+                                <td class="py-3">
+                                    <div>John Doe</div>
+                                    <div class="text-muted">Acme Inc.</div>
+                                </td>
+                                <td class="py-3">(000) 111-1234</td>
+                                <td class="py-3">$1,230.00</td>
+                                <td class="py-3">
+                                    <span class="badge badge-pill badge-warning">Pending</span>
+                                </td>
+                                <td class="py-3">
+                                    <div class="position-relative">
+                                        <a id="dropDown16Invoker" class="link-dark d-flex" href="#" aria-controls="dropDown16" aria-haspopup="true" aria-expanded="false" data-unfold-target="#dropDown16" data-unfold-event="click" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-animation-in="fadeIn" data-unfold-animation-out="fadeOut">
+                                            <i class="gd-more-alt icon-text"></i>
+                                        </a>
+                                        <ul id="dropDown16" class="unfold unfold-light unfold-top unfold-right position-absolute py-3 mt-1 unfold-css-animation unfold-hidden fadeOut" aria-labelledby="dropDown16Invoker" style="min-width: 150px; animation-duration: 300ms; right: 0px;">
+                                            <li class="unfold-item">
+                                                <a class="unfold-link media align-items-center text-nowrap" href="#">
+                                                    <i class="gd-pencil unfold-item-icon mr-3"></i>
+                                                    <span class="media-body">Edit</span>
+                                                </a>
+                                            </li>
+                                            <li class="unfold-item">
+                                                <a class="unfold-link media align-items-center text-nowrap" href="#">
+                                                    <i class="gd-close unfold-item-icon mr-3"></i>
+                                                    <span class="media-body">Delete</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Más filas aquí -->
+                        </tbody>
+                    </table>
                 </div>
-                <!-- End Form -->
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                        data-dismiss="modal">Cerrar</button>
-
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
 </div>
+
 <!-- End Modal -->
