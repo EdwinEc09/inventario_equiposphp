@@ -9,8 +9,8 @@ function obtener_datos_tipoequipos() {
         type: "POST", // Método de envío
         dataType: "JSON", // Esperamos respuesta en formato JSON
         data: {
-            run: 'equipos', // Parámetro 'run'
-            action: 'obtenertipoequipos' // Parámetro 'action'
+            run: 'ajustesequipos', // Parámetro 'run'
+            action: 'obtenertipoequipos_js' // Parámetro 'action'
         },
         success: function (data) {
             // loading(false); // Quitar el indicador de carga
@@ -89,8 +89,8 @@ function agregar_tipoequipos() {
         type: "POST", // Método de envío
         dataType: "JSON", // Esperamos respuesta en formato JSON
         data: {
-            run: 'equipos', // Parámetro 'run'
-            action: 'agregar_tiposequipos_json', // Parámetro 'action'
+            run: 'ajustesequipos', // Parámetro 'run'
+            action: 'agregar_tiposequipos_js', // Parámetro 'action'
             tipos_equipos_tiposequipos_json: tipos_equipos_tiposequipos, // Parámetro 'empleado_asignacion'
         },
         success: function (response, data) {
@@ -157,7 +157,7 @@ function obtener_datos_estadosequipos() {
         type: "POST", // Método de envío
         dataType: "JSON", // Esperamos respuesta en formato JSON
         data: {
-            run: 'equipos', // Parámetro 'run'
+            run: 'ajustesequipos', // Parámetro 'run'
             action: 'obtenerestadosequipos' // Parámetro 'action'
         },
         success: function (data) {
@@ -246,7 +246,7 @@ function agregar_estadosequipos() {
         type: "POST", // Método de envío
         dataType: "JSON", // Esperamos respuesta en formato JSON
         data: {
-            run: 'equipos', // Parámetro 'run'
+            run: 'ajustesequipos', // Parámetro 'run'
             action: 'agregar_estadosequipos_js', // Parámetro 'action'
             agregar_estados_estadoequipos_json: agregar_estados_estadoequipos, // Parámetro 'empleado_asignacion'
             agregar_colorestado_estadoequipos_json: agregar_colorestado_estadoequipos, // Parámetro 'empleado_asignacion'
@@ -294,7 +294,7 @@ function mostrar_datos_modalactualizarestadosequipos(ID) {
         type: "POST",
         dataType: "JSON",
         data: {
-            run: 'equipos',
+            run: 'ajustesequipos',
             action: 'obtener_estadoequipo_unico_js', // Nueva acción para obtener un solo empleado
             id_estadoequipo_json: ID
         },
@@ -337,7 +337,7 @@ function actualizar_estadosequipos() {
             type: "POST",
             dataType: "JSON",
             data: {
-                run: 'equipos',
+                run: 'ajustesequipos',
                 action: 'actualizar_estadosequipos_js', // Nueva acción para obtener un solo empleado
                 actualizar_ID_estadoequipos_json: actualizar_ID_estadoequipos,
                 actualizar_estados_estadoequipos_json: actualizar_estados_estadoequipos,
@@ -430,7 +430,7 @@ function inactivar_estadoequipo(idsSeleccionados) {
             type: "POST", // Método de envío
             dataType: "JSON", // Esperamos respuesta en formato JSON
             data: {
-                run: 'equipos', // Parámetro 'run'
+                run: 'ajustesequipos', // Parámetro 'run'
                 action: 'inactivar_activar_varios_estadoequipo_js', // Parámetro 'action'
                 ids_estadoseqipos: idsSeleccionados, // Enviar los IDs seleccionados
                 estado_estadoequipos_varios_json: estado_estadoequipos_variosjs

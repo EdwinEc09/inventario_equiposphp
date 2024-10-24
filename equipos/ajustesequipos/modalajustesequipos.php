@@ -166,18 +166,18 @@
 
                             <select id="tipo_equipo_actualizar" name="tipo_equipo_actualizar" class="form-control">
                                 <?php
-                                    // Llamamos a la función para obtener los estados
-                                    $tipos_equipos = $EquiposOS->tipos_equipos_listar_combo();
-                                    if ($tipos_equipos) {
-                                        echo '<option value="">Seleccionar</option>';
-                                        // Itera sobre los resultados y genera las opciones
-                                        foreach ($tipos_equipos as $row) {
-                                            echo '<option value="' . $row->tipo . '"> ' . $row->tipo . ' </option>';
-                                        }
-                                    } else {
-                                        echo '<option value="">No hay Tipos disponibles</option>';
-                                    }
-                                    ?>
+// Llamamos a la función para obtener los estados
+$tipos_equipos = $AjustesEquiposOS->tipos_equipos_listar_combo();
+if ($tipos_equipos) {
+    echo '<option value="">Seleccionar</option>';
+    // Itera sobre los resultados y genera las opciones
+    foreach ($tipos_equipos as $row) {
+        echo '<option value="' . $row->tipo . '"> ' . $row->tipo . ' </option>';
+    }
+} else {
+    echo '<option value="">No hay Tipos disponibles</option>';
+}
+?>
                             </select>
                         </div>
 
@@ -229,18 +229,18 @@
                             </select> -->
                             <select id="estado_equipo_actualizar" name="estado_equipo_actualizar" class="form-control">
                                 <?php
-                                    // Llamamos a la función para obtener los estados
-                                    $estados_equipos = $EquiposOS->estados_equipos_listar_combo();
-                                    if ($estados_equipos) {
-                                        echo '<option value="">Seleccionar</option>';
-                                        // Itera sobre los resultados y genera las opciones
-                                        foreach ($estados_equipos as $row) {
-                                            echo '<option value="' . $row->ID . '">' . $row->nombre_estado . '</option>';
-                                        }
-                                    } else { 
-                                        echo '<option value="">No hay estados disponibles</option>';
-                                    }
-                                    ?>
+// Llamamos a la función para obtener los estados
+$estados_equipos = $AjustesEquiposOS->estados_equipos_listar_combo();
+if ($estados_equipos) {
+    echo '<option value="">Seleccionar</option>';
+    // Itera sobre los resultados y genera las opciones
+    foreach ($estados_equipos as $row) {
+        echo '<option value="' . $row->ID . '">' . $row->nombre_estado . '</option>';
+    }
+} else {
+    echo '<option value="">No hay estados disponibles</option>';
+}
+?>
                             </select>
                         </div>
                     </div>

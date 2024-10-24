@@ -1,12 +1,14 @@
 <?php
-// require 'backend/conexion/conexion.php';
+// esto es solo para que los combox se puedan visualizar
 include 'backend/conexion/conexion.php';
 include 'backend/php/empleadosback.php';
 include 'backend/php/equiposback.php';
+include 'backend/php/ajustesequipos.php';
 
 $OS = new OutSourcing();
 $EmpleadosOS = new Empleados(); // Instancia de la clase
 $EquiposOS = new Equipos(); // Instancia de la clase 
+$AjustesEquiposOS = new AjustesEquipos(); // Instancia de la clase
 // Incluir configuración global
 // require 'settings.php';
 

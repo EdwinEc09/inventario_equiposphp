@@ -32,7 +32,7 @@
                     <select id="tipo_equipo" name="tipo_equipo" class="form-control">
                         <?php
                             // Llamamos a la función para obtener los estados
-                            $tipos_equipos = $EquiposOS->tipos_equipos_listar_combo();
+                            $tipos_equipos = $AjustesEquiposOS->tipos_equipos_listar_combo();
                             if ($tipos_equipos) {
                                 echo '<option value="">Seleccionar</option>';
                                 // Itera sobre los resultados y genera las opciones
@@ -95,7 +95,7 @@
                     <select id="estado_equipo" name="estado_equipo" class="form-control">
                         <?php
                             // Llamamos a la función para obtener los estados
-                            $estados_equipos = $EquiposOS->estados_equipos_listar_combo();
+                            $estados_equipos = $AjustesEquiposOS->estados_equipos_listar_combo();
                             if ($estados_equipos) {
                                 echo '<option value="">Seleccionar</option>';
                                 // Itera sobre los resultados y genera las opciones
